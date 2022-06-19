@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Enchantment Order (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Enchantment Order (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
