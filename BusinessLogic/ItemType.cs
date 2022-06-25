@@ -10,6 +10,32 @@ public record ItemType(
         CompatibleEnchantmentTypes: EnchantmentType.All,
         DefaultEnchantmentTypes: new List<EnchantmentType>());
     
+    public ItemType static ItemType Helmet = new(
+        FriendlyName: "Helmet",
+        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        {
+            EnchantmentType.AquaAffinity,
+            EnchantmentType.BlastProtection,
+            EnchantmentType.CurseOfBinding,
+            EnchantmentType.CurseOfVanishing,
+            EnchantmentType.FireProtection,
+            EnchantmentType.Mending,
+            EnchantmentType.ProjectileProtection,
+            EnchantmentType.Protection,
+            EnchantmentType.Respiration,
+            EnchantmentType.Thorns,
+            EnchantmentType.Unbreaking
+        },
+        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        {
+            EnchantmentType.AquaAffinity,
+            EnchantmentType.Mending,
+            EnchantmentType.Protection,
+            EnchantmentType.Respiration,
+            EnchantmentType.Thorns,
+            EnchantmentType.Unbreaking
+        });
+    
     // TODO: Encode the remaining item types from the Kotlin file
     // Note: You do not have to encode the fields "itemCategory" and "iconResource"
 
