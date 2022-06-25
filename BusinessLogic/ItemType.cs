@@ -17,6 +17,25 @@ public record ItemType(
     {
         EnchantedBook,
         // TODO: Enumerate all the enchantment types here
+        Helmet,
+        Chestplate,
+        Leggings,
+        Boots,
+        Elytra,
+        Head,
+        Sword,
+        Axe,
+        Pickaxe,
+        Shovel,
+        Hoe,
+        Bow,
+        FishingRod,
+        Trident,
+        Crossbow,
+        Shears,
+        FlintAndSteel,
+        CarrotOnAStick,
+        WarpedFungusOnAStick,
     };
     
     public bool IsCompatibleWith(ItemType target)
