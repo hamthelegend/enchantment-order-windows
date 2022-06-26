@@ -319,8 +319,6 @@ public record class EnchantmentType(
             ItemMultiplier: 2,
             BookMultiplier: 1);
 
-
-
     public static readonly List<EnchantmentType> All = new()
     {
         AquaAffinity,
@@ -364,7 +362,12 @@ public record class EnchantmentType(
         Unbreaking
     };
 
-    public List<EnchantmentType> IncompatibleEnchantmentTypes => new List<EnchantmentType>();
+    public List<EnchantmentType> IncompatibleEnchantmentTypes =>
+        this == AquaAffinity ? new List<EnchantmentType>() :
+        this == BaneOfArthropods ? new List<EnchantmentType> { Sharpness, Smite } :
+        this == BlastProtection ? new List<EnchantmentType> { FireProtection, ProjectileProtection, Protection } :
+        // TODO: Enumerate the remain incompatible enchantment types
+        this == Unbreaking ? new List<EnchantmentType>() : throw new AnvilException("Unknown enchantment");
 
     public bool IsIncompatibleWith(EnchantmentType target)
     {
