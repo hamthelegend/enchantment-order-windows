@@ -40,14 +40,14 @@ public class ItemCombinationTest
         
         // TODO: Write combination3 and combination4 along with their respective assertions 
         
-         var combination3 = combination2.Product +
+          var combination3 = combination2.Product +
                            new List<Enchantment> { new(EnchantmentType.Unbreaking, 3) }
                                .ToEnchantedBook();
         combination3.Assert(
             6,
             ItemType.Pickaxe,
-            new Enchantment(EnchantmentType.Fortune, 3));
-            new Enchantment(EnchantmentType.Mending));
+            new Enchantment(EnchantmentType.Fortune, 3),
+            new Enchantment(EnchantmentType.Mending),
             new Enchantment(EnchantmentType.Unbreaking, 3));
 
         var combination4 = combination3.Product +
@@ -56,9 +56,9 @@ public class ItemCombinationTest
         combination4.Assert(
             12,
             ItemType.Pickaxe,
-            new Enchantment(EnchantmentType.Efficiency, 5));
-            new Enchantment(EnchantmentType.Fortune, 3));
-            new Enchantment(EnchantmentType.Mending));
+            new Enchantment(EnchantmentType.Efficiency, 5),
+            new Enchantment(EnchantmentType.Fortune, 3),
+            new Enchantment(EnchantmentType.Mending),
             new Enchantment(EnchantmentType.Unbreaking, 3));
             
     }
