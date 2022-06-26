@@ -15,8 +15,6 @@ public record class EnchantmentType(
             ItemMultiplier: 4,
             BookMultiplier: 2);
 
-    // TODO: Encode the remaining enchantment types from the Kotlin file
-    
     public static readonly EnchantmentType BaneOfArthropods =
         new(
             FriendlyName: "Bane of Arthropods",
@@ -326,7 +324,6 @@ public record class EnchantmentType(
     public static readonly List<EnchantmentType> All = new()
     {
         AquaAffinity,
-        // TODO: Enumerate all the enchantment types here
         BaneOfArthropods,
         BlastProtection,
         Channeling,

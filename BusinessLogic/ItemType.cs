@@ -5,12 +5,12 @@ public record ItemType(
     List<EnchantmentType> CompatibleEnchantmentTypes,
     List<EnchantmentType> DefaultEnchantmentTypes)
 {
-    public static ItemType EnchantedBook = new(
+    public static readonly ItemType EnchantedBook = new(
         FriendlyName: "Enchanted Book",
         CompatibleEnchantmentTypes: EnchantmentType.All,
         DefaultEnchantmentTypes: new List<EnchantmentType>());
     
-    public static ItemType Helmet = new(
+    public static readonly ItemType Helmet = new(
        FriendlyName: "Helmet",
        CompatibleEnchantmentTypes: new List<EnchantmentType>() 
        {
@@ -36,7 +36,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
        });
 
-    public static ItemType Chestplate = new(
+    public static readonly ItemType Chestplate = new(
        FriendlyName: "Chestplate",
        CompatibleEnchantmentTypes: new List<EnchantmentType>()
        {
@@ -58,7 +58,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
        });
 
-    public static ItemType Leggings = new(
+    public static readonly ItemType Leggings = new(
        FriendlyName: "Leggins",
        CompatibleEnchantmentTypes: new List<EnchantmentType>()
        {
@@ -82,7 +82,7 @@ public record ItemType(
                 EnchantmentType.Unbreaking
        });
 
-    public static ItemType Boots = new(
+    public static readonly ItemType Boots = new(
        FriendlyName: "Boots",
        CompatibleEnchantmentTypes: new List<EnchantmentType>()
        {
@@ -111,7 +111,7 @@ public record ItemType(
                 EnchantmentType.Unbreaking
        });
 
-    public static ItemType Elytra = new(
+    public static readonly ItemType Elytra = new(
        FriendlyName: "Elytra",
        CompatibleEnchantmentTypes: new List<EnchantmentType>()
        {
@@ -126,7 +126,7 @@ public record ItemType(
                 EnchantmentType.Unbreaking
        });
 
-    public static ItemType Head = new(
+    public static readonly ItemType Head = new(
        FriendlyName: "Head",
        CompatibleEnchantmentTypes: new List<EnchantmentType>()
        {
@@ -139,7 +139,7 @@ public record ItemType(
                 EnchantmentType.CurseOfBinding,
        });
     
-    public static ItemType Sword = new(
+    public static readonly ItemType Sword = new(
         FriendlyName: "Sword",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -165,7 +165,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Axe = new(
+    public static readonly ItemType Axe = new(
         FriendlyName: "Axe",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -188,7 +188,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Pickaxe = new(
+    public static readonly ItemType Pickaxe = new(
         FriendlyName: "Pickaxe",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -207,7 +207,7 @@ public record ItemType(
              EnchantmentType.Unbreaking
         });
 
-    public static ItemType Shovel = new(
+    public static readonly ItemType Shovel = new(
         FriendlyName: "Shovel",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -226,7 +226,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Hoe = new(
+    public static readonly ItemType Hoe = new(
         FriendlyName: "Hoe",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -245,7 +245,7 @@ public record ItemType(
              EnchantmentType.Unbreaking
         });
 
-    public static ItemType Bow = new(
+    public static readonly ItemType Bow = new(
         FriendlyName: "Bow",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -266,7 +266,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType FishingRod = new(
+    public static readonly ItemType FishingRod = new(
         FriendlyName: "FishingRod",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -284,7 +284,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Trident = new(
+    public static readonly ItemType Trident = new(
         FriendlyName: "Trident",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -305,7 +305,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Crossbow = new(
+    public static readonly ItemType Crossbow = new(
         FriendlyName: "Crossbow",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -324,7 +324,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType Shears = new(
+    public static readonly ItemType Shears = new(
         FriendlyName: "Shears",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -340,7 +340,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType FlintAndSteel = new(
+    public static readonly ItemType FlintAndSteel = new(
         FriendlyName: "FlintAndSteel",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -354,7 +354,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType CarrotOnAStick = new(
+    public static readonly ItemType CarrotOnAStick = new(
         FriendlyName: "CarrotOnAStick",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -368,7 +368,7 @@ public record ItemType(
             EnchantmentType.Unbreaking
         });
 
-    public static ItemType WarpedFungusOnAStick = new(
+    public static readonly ItemType WarpedFungusOnAStick = new(
         FriendlyName: "WarpedFungusOnAStick",
         CompatibleEnchantmentTypes: new List<EnchantmentType>()
         {
@@ -381,14 +381,10 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         });
-    
-    // TODO: Encode the remaining item types from the Kotlin file
-    // Note: You do not have to encode the fields "itemCategory" and "iconResource"
 
     public static readonly List<ItemType> All = new()
     {
         EnchantedBook,
-        // TODO: Enumerate all the enchantment types here
         Helmet,
         Chestplate,
         Leggings,
