@@ -367,6 +367,40 @@ public record class EnchantmentType(
         this == BaneOfArthropods ? new List<EnchantmentType> { Sharpness, Smite } :
         this == BlastProtection ? new List<EnchantmentType> { FireProtection, ProjectileProtection, Protection } :
         // TODO: Enumerate the remain incompatible enchantment types
+        this == Channeling ? new List<EnchantmentType> {Riptide} :
+        this == CurseOfBinding ? new List<EnchantmentType>() :
+        this == CurseOfVanishing ? new List<EnchantmentType>() :
+        this == DepthStrider ? new List<EnchantmentType> { FrostWalker } :
+        this == Efficiency ? new List<EnchantmentType>() :
+        this == FeatherFalling ? new List<EnchantmentType>() :
+        this == FireAspect ? new List<EnchantmentType>():
+        this == FireProtection ? new List<EnchantmentType> {BlastProtection, ProjectileProtection, Protection } :
+        this == Flame ? new List<EnchantmentType>() :
+        this == Fortune ? new List<EnchantmentType> { SilkTouch } :
+        this == FrostWalker ? new List<EnchantmentType> { DepthStrider } :
+        this == Impaling ? new List<EnchantmentType>() :
+        this == Infinity ? new List<EnchantmentType> { Mending } :
+        this == Knockback ? new List<EnchantmentType>() :
+        this == Looting ? new List<EnchantmentType>() :
+        this == Loyalty ? new List<EnchantmentType> { Riptide } :
+        this == LuckOfTheSea ? new List<EnchantmentType>() :
+        this == Lure ? new List<EnchantmentType>() :
+        this == Mending ? new List<EnchantmentType> { Infinity } :
+        this == Multishot ? new List<EnchantmentType> { Piercing } :
+        this == Power ? new List<EnchantmentType>() :
+        this == ProjectileProtection ? new List<EnchantmentType> { BlastProtection, FireProtection, Protection } :
+        this == Protection ? new List<EnchantmentType> { BlastProtection, FireProtection, ProjectileProtection } :
+        this == Punch ? new List<EnchantmentType>() :
+        this == QuickCharge ? new List<EnchantmentType>() :
+        this == Respiration ? new List<EnchantmentType>() :
+        this == Riptide ? new List<EnchantmentType> { Channeling, Loyalty } :
+        this == Sharpness ? new List<EnchantmentType> { BaneOfArthropods, Smite } :
+        this == SilkTouch ? new List<EnchantmentType> { Fortune } :
+        this == Smite ? new List<EnchantmentType> { BaneOfArthropods, Sharpness } :
+        this == SoulSpeed ? new List<EnchantmentType>() :
+        this == SweepingEdge ? new List<EnchantmentType>() :
+        this == SwiftSneak ? new List<EnchantmentType>() :
+        this == Thorns ? new List<EnchantmentType>() :
         this == Unbreaking ? new List<EnchantmentType>() : throw new AnvilException("Unknown enchantment");
 
     public bool IsIncompatibleWith(EnchantmentType target)
