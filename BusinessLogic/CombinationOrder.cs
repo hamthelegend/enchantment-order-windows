@@ -3,10 +3,9 @@
 public class CombinationOrder
 {
     
+    public int Id { get; }
     public List<Combination> Combinations { get; }
     public string Name { get; }
-    public int Id { get; }
-    
     public int TotalCost { get; }
     public Item FinalProduct { get; }
     
@@ -18,4 +17,5 @@ public class CombinationOrder
         TotalCost = combinations.Sum(combination => combination.Cost);
         FinalProduct = Combinations.Last().Product;
     }
+    
 }
