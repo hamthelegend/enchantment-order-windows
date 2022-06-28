@@ -14,6 +14,7 @@ public record ItemType(
 
     // TODO: Change the image URIs to match the actual images under the Assets folder that represent the items
 
+
     public static readonly ItemType Helmet = new(
        FriendlyName: "Helmet",
        CompatibleEnchantmentTypes: new List<EnchantmentType>
@@ -39,7 +40,7 @@ public record ItemType(
             EnchantmentType.Thorns,
             EnchantmentType.Unbreaking
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/helmet.png"));
 
     public static readonly ItemType Chestplate = new(
        FriendlyName: "Chestplate",
@@ -62,10 +63,10 @@ public record ItemType(
             EnchantmentType.Thorns,
             EnchantmentType.Unbreaking
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/chestplate.png"));
 
     public static readonly ItemType Leggings = new(
-       FriendlyName: "Leggins",
+       FriendlyName: "Leggings",
        CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.BlastProtection,
@@ -87,7 +88,7 @@ public record ItemType(
                 EnchantmentType.Thorns,
                 EnchantmentType.Unbreaking
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/leggings.png"));
 
     public static readonly ItemType Boots = new(
        FriendlyName: "Boots",
@@ -117,7 +118,7 @@ public record ItemType(
                 EnchantmentType.Thorns,
                 EnchantmentType.Unbreaking
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/boots.png"));
 
     public static readonly ItemType Elytra = new(
        FriendlyName: "Elytra",
@@ -133,7 +134,7 @@ public record ItemType(
                 EnchantmentType.Mending,
                 EnchantmentType.Unbreaking
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/elytra.png"));
 
     public static readonly ItemType Head = new(
        FriendlyName: "Head",
@@ -143,11 +144,11 @@ public record ItemType(
                 EnchantmentType.CurseOfVanishing,
 
        },
-   DefaultEnchantmentTypes: new List<EnchantmentType>
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.CurseOfBinding,
        },
-       ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+       ImageUri: new Uri("ms-appx:///Assets/head.png"));
     
     public static readonly ItemType Sword = new(
         FriendlyName: "Sword",
@@ -174,7 +175,7 @@ public record ItemType(
             EnchantmentType.SweepingEdge,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/sword.png"));
 
     public static readonly ItemType Axe = new(
         FriendlyName: "Axe",
@@ -198,7 +199,7 @@ public record ItemType(
             EnchantmentType.SilkTouch,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/axe.png"));
 
     public static readonly ItemType Pickaxe = new(
         FriendlyName: "Pickaxe",
@@ -218,7 +219,7 @@ public record ItemType(
              EnchantmentType.SilkTouch,
              EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/pickaxe.png"));
 
     public static readonly ItemType Shovel = new(
         FriendlyName: "Shovel",
@@ -238,7 +239,7 @@ public record ItemType(
             EnchantmentType.SilkTouch,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/shovel.png"));
 
     public static readonly ItemType Hoe = new(
         FriendlyName: "Hoe",
@@ -258,7 +259,7 @@ public record ItemType(
              EnchantmentType.SilkTouch,
              EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/hoe.png"));
 
     public static readonly ItemType Bow = new(
         FriendlyName: "Bow",
@@ -280,7 +281,7 @@ public record ItemType(
             EnchantmentType.Punch,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/bow.png"));
 
     public static readonly ItemType FishingRod = new(
         FriendlyName: "FishingRod",
@@ -299,7 +300,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/fishing_rod.png"));
 
     public static readonly ItemType Trident = new(
         FriendlyName: "Trident",
@@ -321,7 +322,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/trident.png"));
 
     public static readonly ItemType Crossbow = new(
         FriendlyName: "Crossbow",
@@ -341,7 +342,7 @@ public record ItemType(
             EnchantmentType.QuickCharge,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/crossbow.png"));
 
     public static readonly ItemType Shears = new(
         FriendlyName: "Shears",
@@ -358,7 +359,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/shears.png"));
 
     public static readonly ItemType FlintAndSteel = new(
         FriendlyName: "FlintAndSteel",
@@ -373,7 +374,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/flint_and_steel.png"));
 
     public static readonly ItemType CarrotOnAStick = new(
         FriendlyName: "CarrotOnAStick",
@@ -388,7 +389,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/carrot_on_a_stick.png"));
 
     public static readonly ItemType WarpedFungusOnAStick = new(
         FriendlyName: "WarpedFungusOnAStick",
@@ -403,7 +404,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
+        ImageUri: new Uri("ms-appx:///Assets/warped_fungus_on_a_stick.png"));
 
     public static readonly List<ItemType> All = new()
     {
