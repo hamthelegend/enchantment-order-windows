@@ -19,13 +19,18 @@ using Windows.Foundation.Collections;
 namespace Enchantment_Order
 {
     /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public sealed partial class HomePage : Page
     {
-        public MainWindow()
+        public HomePage()
         {
             this.InitializeComponent();
+        }
+
+        private void StartEnchanting(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TargetPickerPage));
         }
     }
 }
