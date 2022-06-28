@@ -11,10 +11,12 @@ public record ItemType(
         CompatibleEnchantmentTypes: EnchantmentType.All,
         DefaultEnchantmentTypes: new List<EnchantmentType>(),
         ImageUri: new Uri("ms-appx:///Assets/book_enchanted.png"));
-    
+
+    // TODO: Change the image URIs to match the actual images under the Assets folder that represent the items
+
     public static readonly ItemType Helmet = new(
        FriendlyName: "Helmet",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>() 
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
             EnchantmentType.AquaAffinity,
             EnchantmentType.BlastProtection,
@@ -28,7 +30,7 @@ public record ItemType(
             EnchantmentType.Thorns,
             EnchantmentType.Unbreaking
        },
-       DefaultEnchantmentTypes: new List<EnchantmentType>()
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
             EnchantmentType.AquaAffinity,
             EnchantmentType.Mending,
@@ -41,7 +43,7 @@ public record ItemType(
 
     public static readonly ItemType Chestplate = new(
        FriendlyName: "Chestplate",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>()
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
             EnchantmentType.BlastProtection,
             EnchantmentType.CurseOfBinding,
@@ -53,7 +55,7 @@ public record ItemType(
             EnchantmentType.Thorns,
             EnchantmentType.Unbreaking
        },
-       DefaultEnchantmentTypes: new List<EnchantmentType>()
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
             EnchantmentType.Mending,
             EnchantmentType.Protection,
@@ -64,7 +66,7 @@ public record ItemType(
 
     public static readonly ItemType Leggings = new(
        FriendlyName: "Leggins",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>()
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.BlastProtection,
                 EnchantmentType.CurseOfBinding,
@@ -77,7 +79,7 @@ public record ItemType(
                 EnchantmentType.Unbreaking,
                 EnchantmentType.SwiftSneak
        },
-       DefaultEnchantmentTypes: new List<EnchantmentType>()
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.Mending,
                 EnchantmentType.Protection,
@@ -89,7 +91,7 @@ public record ItemType(
 
     public static readonly ItemType Boots = new(
        FriendlyName: "Boots",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>()
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.BlastProtection,
                 EnchantmentType.CurseOfBinding,
@@ -105,7 +107,7 @@ public record ItemType(
                 EnchantmentType.Thorns,
                 EnchantmentType.Unbreaking
        },
-       DefaultEnchantmentTypes: new List<EnchantmentType>()
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.DepthStrider,
                 EnchantmentType.FeatherFalling,
@@ -119,14 +121,14 @@ public record ItemType(
 
     public static readonly ItemType Elytra = new(
        FriendlyName: "Elytra",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>()
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.CurseOfBinding,
                 EnchantmentType.CurseOfVanishing,
                 EnchantmentType.Mending,
                 EnchantmentType.Unbreaking
        },
-       DefaultEnchantmentTypes: new List<EnchantmentType>()
+       DefaultEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.Mending,
                 EnchantmentType.Unbreaking
@@ -135,13 +137,13 @@ public record ItemType(
 
     public static readonly ItemType Head = new(
        FriendlyName: "Head",
-       CompatibleEnchantmentTypes: new List<EnchantmentType>()
+       CompatibleEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.CurseOfBinding,
                 EnchantmentType.CurseOfVanishing,
 
        },
-   DefaultEnchantmentTypes: new List<EnchantmentType>()
+   DefaultEnchantmentTypes: new List<EnchantmentType>
        {
                 EnchantmentType.CurseOfBinding,
        },
@@ -149,7 +151,7 @@ public record ItemType(
     
     public static readonly ItemType Sword = new(
         FriendlyName: "Sword",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.BaneOfArthropods,
             EnchantmentType.CurseOfVanishing,
@@ -162,7 +164,7 @@ public record ItemType(
             EnchantmentType.SweepingEdge,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.FireAspect,
             EnchantmentType.Knockback,
@@ -176,7 +178,7 @@ public record ItemType(
 
     public static readonly ItemType Axe = new(
         FriendlyName: "Axe",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.BaneOfArthropods,
             EnchantmentType.CurseOfVanishing,
@@ -188,7 +190,7 @@ public record ItemType(
             EnchantmentType.Smite,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Efficiency,
             EnchantmentType.Mending,
@@ -200,7 +202,7 @@ public record ItemType(
 
     public static readonly ItemType Pickaxe = new(
         FriendlyName: "Pickaxe",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
              EnchantmentType.CurseOfVanishing,
              EnchantmentType.Efficiency,
@@ -209,7 +211,7 @@ public record ItemType(
              EnchantmentType.SilkTouch,
              EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
              EnchantmentType.Efficiency,
              EnchantmentType.Mending,
@@ -220,7 +222,7 @@ public record ItemType(
 
     public static readonly ItemType Shovel = new(
         FriendlyName: "Shovel",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Efficiency,
@@ -229,7 +231,7 @@ public record ItemType(
             EnchantmentType.SilkTouch,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Efficiency,
             EnchantmentType.Mending,
@@ -240,7 +242,7 @@ public record ItemType(
 
     public static readonly ItemType Hoe = new(
         FriendlyName: "Hoe",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
              EnchantmentType.CurseOfVanishing,
              EnchantmentType.Efficiency,
@@ -249,7 +251,7 @@ public record ItemType(
              EnchantmentType.SilkTouch,
              EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Efficiency,
              EnchantmentType.Mending,
@@ -260,7 +262,7 @@ public record ItemType(
 
     public static readonly ItemType Bow = new(
         FriendlyName: "Bow",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Flame,
@@ -270,7 +272,7 @@ public record ItemType(
             EnchantmentType.Punch,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Flame,
             EnchantmentType.Infinity,
@@ -282,7 +284,7 @@ public record ItemType(
 
     public static readonly ItemType FishingRod = new(
         FriendlyName: "FishingRod",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.LuckOfTheSea,
@@ -290,7 +292,7 @@ public record ItemType(
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.LuckOfTheSea,
             EnchantmentType.Lure,
@@ -301,7 +303,7 @@ public record ItemType(
 
     public static readonly ItemType Trident = new(
         FriendlyName: "Trident",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Channeling,
             EnchantmentType.CurseOfVanishing,
@@ -311,7 +313,7 @@ public record ItemType(
             EnchantmentType.Riptide,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Channeling,
             EnchantmentType.Impaling,
@@ -323,7 +325,7 @@ public record ItemType(
 
     public static readonly ItemType Crossbow = new(
         FriendlyName: "Crossbow",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Mending,
@@ -332,7 +334,7 @@ public record ItemType(
             EnchantmentType.QuickCharge,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Mending,
             EnchantmentType.Multishot,
@@ -343,14 +345,14 @@ public record ItemType(
 
     public static readonly ItemType Shears = new(
         FriendlyName: "Shears",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Efficiency,
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Efficiency,
             EnchantmentType.Mending,
@@ -360,13 +362,13 @@ public record ItemType(
 
     public static readonly ItemType FlintAndSteel = new(
         FriendlyName: "FlintAndSteel",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
@@ -375,13 +377,13 @@ public record ItemType(
 
     public static readonly ItemType CarrotOnAStick = new(
         FriendlyName: "CarrotOnAStick",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
@@ -390,13 +392,13 @@ public record ItemType(
 
     public static readonly ItemType WarpedFungusOnAStick = new(
         FriendlyName: "WarpedFungusOnAStick",
-        CompatibleEnchantmentTypes: new List<EnchantmentType>()
+        CompatibleEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.CurseOfVanishing,
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
         },
-        DefaultEnchantmentTypes: new List<EnchantmentType>()
+        DefaultEnchantmentTypes: new List<EnchantmentType>
         {
             EnchantmentType.Mending,
             EnchantmentType.Unbreaking
