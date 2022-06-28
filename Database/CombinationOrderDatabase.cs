@@ -2,8 +2,14 @@
 
 namespace Database;
 
-public static class CombinationOrderDao
+public static class CombinationOrderDatabase
 {
+
+    public static void EnsureCreated()
+    {
+        using var context = new CombinationOrderContext();
+        context.Database.EnsureCreated();
+    }
 
     public static List<CombinationOrder> GetAll()
     {
@@ -25,7 +31,7 @@ public static class CombinationOrderDao
         using var context = new CombinationOrderContext();
         var entity = context.CombinationOrderEntities.FirstOrDefault(entity => entity.Id == combinationOrder.Id);
         if (entity == null) throw new EntityDoesNotExistException(combinationOrder.Id);
-        entity.Combinations = combinationOrder.Combinations;
+        entity.Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity()).ToList();
         entity.Name = combinationOrder.Name;
         context.SaveChanges();
     }

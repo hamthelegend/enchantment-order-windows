@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic;
 
-public record class EnchantmentType(
+public record EnchantmentType(
     string FriendlyName,
     string AbbreviatedName,
     int MaxLevel,
