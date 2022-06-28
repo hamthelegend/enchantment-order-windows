@@ -38,7 +38,7 @@ public static class Anvil
             if (sacrificeEnchantment.Level > targetEnchantment.Level)
             {
                 productEnchantments[sacrificeEnchantmentIndexInTarget] = sacrificeEnchantment;
-                combiningCost += (sacrificeEnchantment.Level - targetEnchantment.Level) * costMultiplier;
+                combiningCost += sacrificeEnchantment.Level * costMultiplier;
             }
             else if (sacrificeEnchantment.Level == targetEnchantment.Level &&
                      targetEnchantment.Level < targetEnchantment.Type.MaxLevel)

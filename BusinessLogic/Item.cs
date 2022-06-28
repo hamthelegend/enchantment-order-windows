@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic;
+﻿using System.Text;
+
+namespace BusinessLogic;
 
 public record Item(
     ItemType Type,
@@ -7,7 +9,20 @@ public record Item(
 {
     public override string ToString()
     {
-        return $"{Type.FriendlyName}: {Enchantments}";
+        var stringBuilder = new StringBuilder($"{Type.FriendlyName}: [");
+        
+        for (var i = 0; i < Enchantments.Count; i++)
+        {
+            if (i != 0)
+            {
+                stringBuilder.Append($", ");
+            }
+            stringBuilder.Append(Enchantments[i]);
+        }
+
+        stringBuilder.Append(']');
+
+        return stringBuilder.ToString();
     }
 
     public static Combination operator +(Item target, Item sacrifice) => Anvil.Combine(target, sacrifice);
@@ -39,30 +54,27 @@ public record Item(
 
     public bool HasCompatibleEnchantmentsWith(Item target)
     {
-        
-        var sacrifice = this;
-        return (from sacrificeEnchantment in sacrifice.Enchantments let sacrificeEnchantmentCompatible = target.Enchantments.All(targetEnchantment => !sacrificeEnchantment.IsIncompatibleWith(targetEnchantment)) where sacrificeEnchantmentCompatible && sacrificeEnchantment.Type.IsCompatibleWith(target.Type) select sacrificeEnchantment).Any();
 
-        // Original non-LINQ
-        // var sacrifice = this;
-        // foreach (var sacrificeEnchantment in sacrifice.Enchantments)
-        // {
-        //     var sacrificeEnchantmentCompatible = true;
-        //     foreach (var targetEnchantment in target.Enchantments)
-        //     {
-        //         if (sacrificeEnchantment.IsIncompatibleWith(targetEnchantment))
-        //         {
-        //             sacrificeEnchantmentCompatible = false;
-        //             break;
-        //         }
-        //     }
-        //     
-        //     if (sacrificeEnchantmentCompatible &&
-        //         sacrificeEnchantment.Type.IsCompatibleWith(target.Type))
-        //     {
-        //         return true;
-        //     }
-        // }
+        var sacrifice = this;
+        foreach (var sacrificeEnchantment in sacrifice.Enchantments)
+        {
+            var sacrificeEnchantmentCompatible = true;
+            foreach (var targetEnchantment in target.Enchantments)
+            {
+                if (sacrificeEnchantment.IsIncompatibleWith(targetEnchantment))
+                {
+                    sacrificeEnchantmentCompatible = false;
+                    break;
+                }
+            }
+            
+            if (sacrificeEnchantmentCompatible &&
+                sacrificeEnchantment.Type.IsCompatibleWith(target.Type))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool HasNoCompatibleEnchantmentsWith(Item target) => !HasCompatibleEnchantmentsWith(target);

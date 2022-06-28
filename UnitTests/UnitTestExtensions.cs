@@ -10,9 +10,9 @@ public static class UnitTestExtensions
         params Enchantment[] enchantments)
     {
         Console.WriteLine(combination);
-        Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(combination.Product.Type == itemType);
-        Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(combination.Product.Enchantments == enchantments.ToList());
-        Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(combination.Cost == cost);
+        Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(itemType == combination.Product.Type );
+        Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEquivalent(enchantments, combination.Product.Enchantments);
+        Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(cost == combination.Cost);
     }
 
     public static void Assert<E>(Func<Combination> combinationBlock) where E : Exception

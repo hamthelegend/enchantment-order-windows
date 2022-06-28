@@ -37,6 +37,6 @@ public record Enchantment(
         return compatible;
     }
 
-    public bool IsIncompatibleWith(Enchantment target) => !IsIncompatibleWith(target);
+    public bool IsIncompatibleWith(Enchantment target) => !IsCompatibleWith(target);
     
 }

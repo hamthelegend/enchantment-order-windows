@@ -30,7 +30,7 @@ public class ItemCombinationTest
             new Enchantment(EnchantmentType.Fortune, 3));
 
         var combination2 = combination1.Product +
-                           new List<Enchantment> { new Enchantment(EnchantmentType.Mending) }
+                           new List<Enchantment> { new(EnchantmentType.Mending) }
                                .ToEnchantedBook();
         combination2.Assert(
             3,
@@ -38,11 +38,9 @@ public class ItemCombinationTest
             new Enchantment(EnchantmentType.Fortune, 3),
             new Enchantment(EnchantmentType.Mending));
         
-        // TODO: Write combination3 and combination4 along with their respective assertions 
-        
-          var combination3 = combination2.Product +
-                           new List<Enchantment> { new(EnchantmentType.Unbreaking, 3) }
-                               .ToEnchantedBook();
+      var combination3 = combination2.Product +
+                       new List<Enchantment> { new(EnchantmentType.Unbreaking, 3) }
+                           .ToEnchantedBook();
         combination3.Assert(
             6,
             ItemType.Pickaxe,
@@ -70,8 +68,7 @@ public class ItemCombinationTest
             ItemType.Pickaxe.ToNewItem() +
             new List<Enchantment>
             {
-                new(EnchantmentType.Protection, 4),
-                new(EnchantmentType.FrostWalker, 2)
+                new(EnchantmentType.Protection, 4)
             }.ToEnchantedBook());
     }
 
@@ -98,7 +95,7 @@ public class ItemCombinationTest
     [TestMethod]
     public void IncompatibleItemTypes2()
     {
-        UnitTestExtensions.Assert<NoCompatibleEnchantmentsException>(() =>
+        UnitTestExtensions.Assert<IncompatibleItemTypesException>(() =>
             ItemType.EnchantedBook.ToNewItem(new List<Enchantment> { new(EnchantmentType.Mending) }) +
             ItemType.Shovel.ToNewItem(new List<Enchantment> { new(EnchantmentType.Fortune, 3) }));
     }
@@ -120,7 +117,7 @@ public class ItemCombinationTest
     }
 
     [TestMethod]
-    public void HasEnchantmentsIncompatbileWithItemType2()
+    public void HasEnchantmentsIncompatibleWithItemType2()
     {
         var combination1 = ItemType.Pickaxe.ToNewItem(new List<Enchantment> { new(EnchantmentType.Mending) }) +
             new List<Enchantment>
@@ -140,7 +137,7 @@ public class ItemCombinationTest
                 new(EnchantmentType.Efficiency, 5),
                 new(EnchantmentType.SilkTouch)
         }.ToEnchantedBook();
-        combination1.Assert(
+        combination2.Assert(
             7,
             ItemType.Pickaxe,
             new Enchantment(EnchantmentType.Mending),
@@ -196,9 +193,8 @@ public class ItemCombinationTest
     public void HasUpgradableDuplicate2()
     {
         var combination = ItemType.Chestplate.ToNewItem(
-            new List<Enchantment> { new Enchantment(EnchantmentType.Protection, 2), new Enchantment(EnchantmentType.Unbreaking, 3) }) + 
-            ItemType.Chestplate.ToNewItem(new List<Enchantment> { new Enchantment(EnchantmentType.Mending), new Enchantment
-            (EnchantmentType.Protection, 3) });
+            new List<Enchantment> { new(EnchantmentType.Protection, 2), new(EnchantmentType.Unbreaking, 3) }) + 
+            ItemType.Chestplate.ToNewItem(new List<Enchantment> { new(EnchantmentType.Mending), new(EnchantmentType.Protection, 3) });
             
         combination.Assert(
             7,
@@ -240,7 +236,7 @@ public class ItemCombinationTest
     public void HasUpgradableDuplicate5()
     {
         var combination = ItemType.Chestplate.ToNewItem(
-            new List<Enchantment> { new Enchantment(EnchantmentType.Protection, 3), new Enchantment(EnchantmentType.Unbreaking, 3) }) +
+            new List<Enchantment> { new(EnchantmentType.Protection, 3), new(EnchantmentType.Unbreaking, 3) }) +
 
             new List<Enchantment>
             {
