@@ -15,6 +15,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Database;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -43,6 +44,17 @@ namespace Enchantment_Order
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+
+            // Create a Frame to act as the navigation context.
+            Frame rootFrame = new Frame();
+
+            // Place the frame in the current Window
+            m_window.Content = rootFrame;
+
+            rootFrame.Navigate(typeof(HomePage), args.Arguments);
+
+            CombinationOrderDatabase.EnsureCreated();
+
             m_window.Activate();
         }
 
