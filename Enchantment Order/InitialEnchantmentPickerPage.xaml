@@ -42,28 +42,46 @@
             </NavigationView.PaneFooter>
 
             <NavigationView.Content>
-                <ListView
-                    x:Name="EnchantmentPicker"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2"
-                    ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
-                    IsItemClickEnabled="True"
-                    SelectionMode="Multiple"
-                    ItemClick="EnchantmentPicker_OnItemClick">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel 
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center">
-                                <TextBlock 
-                                    Text="{Binding String}"
-                                    VerticalAlignment="Center"
-                                    Margin="10, 0, 0, 0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock Text="Target Picked" Margin="15, 10" FontWeight="Medium"/>
+                        <StackPanel 
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="15, 5, 15, 15">
+                            <Image
+                                Height="20"
+                                Width="20">
+                                <Image.Source>
+                                    <BitmapImage UriSource="{x:Bind Target.ImageUri}" />
+                                </Image.Source>
+                            </Image>
+                            <TextBlock 
+                                Text="{x:Bind Target.FriendlyName}"
+                                VerticalAlignment="Center"
+                                Margin="10, 0, 0, 0"/>
+                        </StackPanel>
+                        <ListView
+                            x:Name="EnchantmentPicker"
+                            ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
+                            IsItemClickEnabled="True"
+                            SelectionMode="Multiple"
+                            ItemClick="EnchantmentPicker_OnItemClick">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel 
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center">
+                                        <TextBlock 
+                                            Text="{Binding String}"
+                                            VerticalAlignment="Center"
+                                            Margin="10, 0, 0, 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
             </NavigationView.Content>
 
         </NavigationView>

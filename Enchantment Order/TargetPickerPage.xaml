@@ -31,9 +31,6 @@
         <NavigationView.Content>
             <ListView
                 x:Name="TargetPicker"
-                Grid.Column="0"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
                 ItemsSource="{x:Bind ItemTypes, Mode=OneWay}"
                 SelectionMode="None"
                 IsItemClickEnabled="True"

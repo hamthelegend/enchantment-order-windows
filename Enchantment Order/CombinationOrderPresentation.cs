@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using ABI.Microsoft.UI.Xaml.Media;
 using Extensions;
 
 namespace Enchantment_Order;
@@ -61,6 +62,7 @@ public class ItemPresentation
         get
         {
             var stringBuilder = new StringBuilder();
+            if (Enchantments.Count == 0) return "Unenchanted";
             for (var i = 0; i < Enchantments.Count; i++)
             {
                 if (i != 0)

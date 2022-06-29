@@ -30,6 +30,11 @@ namespace Enchantment_Order
         private bool _isRefreshing;
 
         private ItemTypePresentation _target;
+        internal ItemTypePresentation Target
+        {
+            get => _target;
+            set { _target = value; OnPropertyChanged(); }
+        }
 
         private List<EnchantmentPresentation> _availableEnchantments = new();
         internal List<EnchantmentPresentation> AvailableEnchantments
@@ -58,7 +63,7 @@ namespace Enchantment_Order
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _target = (ItemTypePresentation)e.Parameter;
+            Target = (ItemTypePresentation)e.Parameter;
             RefreshList();
         }
 

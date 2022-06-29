@@ -31,6 +31,16 @@ namespace Enchantment_Order
     {
 
         private ItemPresentation _target;
+        internal ItemPresentation Target
+        {
+            get => _target;
+            set
+            {
+                _target = value; 
+                OnPropertyChanged();
+            }
+        }
+
 
         private readonly ObservableCollection<ItemPresentation> _booksPicked = new();
         private List<EnchantmentPresentation> _availableEnchantments = new();
@@ -56,7 +66,7 @@ namespace Enchantment_Order
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _target = (ItemPresentation) e.Parameter;
+            Target = (ItemPresentation) e.Parameter;
             RefreshList();
         }
 
@@ -88,6 +98,8 @@ namespace Enchantment_Order
             _booksPicked.Clear();
             _enchantmentsPicked.Clear();
             Frame.GoBack();
+            _target = null;
+            NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         private void Search(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

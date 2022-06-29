@@ -45,6 +45,28 @@
         <NavigationView.Content>
             <ScrollViewer>
                 <StackPanel>
+                    <TextBlock Text="Target Picked" Margin="15, 10" FontWeight="Medium"/>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="15, 5, 15, 15">
+                        <Image
+                            Height="20"
+                            Width="20">
+                            <Image.Source>
+                                <BitmapImage UriSource="{x:Bind Target.Type.ImageUri, Mode=OneWay}" />
+                            </Image.Source>
+                        </Image>
+                        <StackPanel 
+                            Margin="10, 0, 0, 0"
+                            VerticalAlignment="Center">
+                            <TextBlock 
+                                Text="{x:Bind Target.Type.FriendlyName, Mode=OneWay}"/>
+                            <TextBlock 
+                                Text="{x:Bind Target.AbbreviatedEnchantmentsString}"
+                                Style="{StaticResource CaptionTextBlockStyle}"/>
+                        </StackPanel>
+                    </StackPanel>
                     <TextBlock Text="Custom Books" Margin="15, 10" FontWeight="Medium"/>
                     <ListView
                         ItemsSource="{x:Bind _booksPicked}"
