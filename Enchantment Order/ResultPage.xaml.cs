@@ -77,17 +77,36 @@ namespace Enchantment_Order
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            var parameters = (ResultPageParameters)e.Parameter;
-            GetBestOrder(parameters.Target.ToItem(), parameters.ItemsPicked.ToItems());
+            var entry = Frame.BackStack.LastOrDefault();
+            if (entry!.SourcePageType == typeof(EnchantmentPickerPage))
+            {
+                base.OnNavigatedTo(e);
+                var parameters = (ResultPageParameters)e.Parameter;
+                GetBestOrder(parameters.Target.ToItem(), parameters.ItemsPicked.ToItems());
+                SaveButton.Visibility = Visibility.Visible;
+                EditButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var combinationOrder = (CombinationOrderPresentation)e.Parameter;
+                SetCombinationOrder(combinationOrder);
+                EditButton.Visibility = Visibility.Visible;
+                SaveButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void GetBestOrder(Item target, List<Item> itemsPicked)
         {
             var combinationOrder = await Task.Run(() => Anvil.GetBestOrder(target, itemsPicked));
-            Combinations = combinationOrder.Combinations.ToCombinationPresentations();
+            SetCombinationOrder(combinationOrder.ToCombinationOrderPresentation());
+        }
+
+        private void SetCombinationOrder(CombinationOrderPresentation combinationOrder)
+        {
+            Combinations = combinationOrder.Combinations;
+            CombinationOrderName = combinationOrder.Name;
             _combinationOrderId = combinationOrder.Id;
-            FinalProduct = combinationOrder.FinalProduct.ToItemPresentation();
+            FinalProduct = combinationOrder.FinalProduct;
         }
 
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)
@@ -95,11 +114,47 @@ namespace Enchantment_Order
             Frame.GoBack();
         }
 
-        private void Save(object sender, RoutedEventArgs e)
+        private async void Save(object sender, RoutedEventArgs e)
         {
-            Name = !string.IsNullOrWhiteSpace(NameField.Text) ? NameField.Text : FinalProduct.Type.FriendlyName;
-            var combinationOrder = new CombinationOrder(Combinations.ToCombinations(), Name);
+            var response = await SaveDialog.ShowAsync();
+            if (response != ContentDialogResult.Primary) return;
+            CombinationOrderName = !string.IsNullOrWhiteSpace(NameField.Text) ? NameField.Text : CombinationOrderName;
+            var combinationOrder = new CombinationOrder(Combinations.ToCombinations(), CombinationOrderName, _combinationOrderId);
             CombinationOrderDatabase.Add(combinationOrder);
+            var combinationOrderFromDb = CombinationOrderDatabase.GetLatest();
+            SetCombinationOrder(combinationOrderFromDb.ToCombinationOrderPresentation());
+            EditButton.Visibility = Visibility.Visible;
+            SaveButton.Visibility = Visibility.Collapsed;
+        }
+
+        private async void Edit(object sender, RoutedEventArgs e)
+        {
+            var response = await EditDialog.ShowAsync();
+            if (response == ContentDialogResult.Primary)
+            {
+                CombinationOrderName = !string.IsNullOrWhiteSpace(EditNameField.Text)
+                    ? EditNameField.Text
+                    : CombinationOrderName;
+                var combinationOrder = new CombinationOrder(Combinations.ToCombinations(), CombinationOrderName, _combinationOrderId);
+                CombinationOrderDatabase.Update(combinationOrder);
+                SetCombinationOrder(combinationOrder.ToCombinationOrderPresentation());
+                EditNameField.Text = "";
+            }
+            else if (response == ContentDialogResult.Secondary)
+            {
+                var deleteResponse = await new ContentDialog()
+                {
+                    Title = "Delete enchantment order",
+                    Content = "Are you sure you want to delete this enchantment order?",
+                    PrimaryButtonText = "Yes",
+                    CloseButtonText = "No",
+                    XamlRoot = SaveButton.XamlRoot
+                }.ShowAsync();
+                if (deleteResponse != ContentDialogResult.Primary) return;
+                var combinationOrder = new CombinationOrder(Combinations.ToCombinations(), CombinationOrderName, _combinationOrderId);
+                CombinationOrderDatabase.Remove(combinationOrder);
+                Frame.GoBack();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

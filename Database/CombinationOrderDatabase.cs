@@ -26,6 +26,13 @@ public static class CombinationOrderDatabase
         context.SaveChanges();
     }
 
+    public static CombinationOrder GetLatest()
+    {
+        using var context = new CombinationOrderContext();
+        var latest = context.CombinationOrderEntities.OrderBy(x => x.Id).Last();
+        return latest.ToCombinationOrder();
+    }
+
     public static void Update(CombinationOrder combinationOrder)
     {
         using var context = new CombinationOrderContext();

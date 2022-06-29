@@ -63,8 +63,8 @@ namespace Enchantment_Order
 
         private void OpenSavedOrder(object sender, ItemClickEventArgs e)
         {
-            var target = (ItemTypePresentation)e.ClickedItem;
-            Frame.Navigate(typeof(InitialEnchantmentPickerPage), target);
+            var combinationOrder = (CombinationOrderPresentation)e.ClickedItem;
+            Frame.Navigate(typeof(ResultPage), combinationOrder);
         }
 
 

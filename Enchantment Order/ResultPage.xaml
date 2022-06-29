@@ -19,7 +19,7 @@
 
             <NavigationView.PaneHeader>
                 <TextBlock
-                Text="{x:Bind CombinationOrderName}"
+                Text="{x:Bind CombinationOrderName, Mode=OneWay}"
                 VerticalAlignment="Center"/>
             </NavigationView.PaneHeader>
 
@@ -30,15 +30,26 @@
             </NavigationView.AutoSuggestBox>
 
             <NavigationView.PaneFooter>
-                <Button
-                    x:Name="AddBookButton"
-                    VerticalAlignment="Stretch"
-                    Margin="0, 8"
-                    Click="Save">
-                    <FontIcon 
-                        FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"
-                        FontSize="12"/>
-                </Button>
+                <Grid>
+                    <Button
+                        x:Name="SaveButton"
+                        VerticalAlignment="Stretch"
+                        Margin="0, 8"
+                        Click="Save">
+                        <FontIcon 
+                            FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;"
+                            FontSize="12"/>
+                    </Button>
+                    <Button
+                        x:Name="EditButton"
+                        VerticalAlignment="Stretch"
+                        Margin="0, 8"
+                        Click="Edit">
+                        <FontIcon 
+                            FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;"
+                            FontSize="12"/>
+                    </Button>
+                </Grid>
             </NavigationView.PaneFooter>
 
             <NavigationView.Content>
@@ -91,14 +102,12 @@
                                     <TextBlock
                                         Grid.Row="1"
                                         Grid.Column="0"
-                                        FontWeight="Medium"
                                         Text="{Binding TargetTypeName}"
                                         HorizontalAlignment="Center"
                                         Margin="10, 5, 10, 0"/>
                                     <TextBlock
                                         Grid.Row="1"
                                         Grid.Column="2"
-                                        FontWeight="Medium"
                                         Text="{Binding SacrificeTypeName}"
                                         HorizontalAlignment="Center"
                                         Margin="10, 5, 10, 0"/>
@@ -151,9 +160,9 @@
         </NavigationView>
 
         <ContentDialog
-            x:Name="SaveCombinationOrder"
+            x:Name="SaveDialog"
             Title="Save enchantment order"
-            PrimaryButtonText="Add"
+            PrimaryButtonText="Save"
             CloseButtonText="Cancel">
             <StackPanel>
                 <TextBlock 
@@ -162,7 +171,24 @@
                     Style="{StaticResource CaptionTextBlockStyle}"/>
                 <TextBox
                     x:Name="NameField"
-                    PlaceholderText="1"/>
+                    PlaceholderText="{x:Bind CombinationOrderName, Mode=OneWay}"/>
+            </StackPanel>
+        </ContentDialog>
+
+        <ContentDialog
+            x:Name="EditDialog"
+            Title="Edit enchantment order"
+            PrimaryButtonText="Save"
+            CloseButtonText="Cancel"
+            SecondaryButtonText="Delete">
+            <StackPanel>
+                <TextBlock 
+                    Text="Name"
+                    Margin="0, 0, 0, 10"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+                <TextBox
+                    x:Name="EditNameField"
+                    PlaceholderText="{x:Bind CombinationOrderName, Mode=OneWay}"/>
             </StackPanel>
         </ContentDialog>
 

@@ -13,6 +13,8 @@ public class CombinationOrderPresentation
     public List<CombinationPresentation> Combinations { get; set; }
     public string Name { get; set; }
     public ItemPresentation FinalProduct { get; set; }
+    public Uri TargetTypeImageUri => FinalProduct.Type.ImageUri;
+    public string FinalProductEnchantments => FinalProduct.AbbreviatedEnchantmentsString;
 }
 
 public class CombinationPresentation

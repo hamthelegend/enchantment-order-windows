@@ -42,11 +42,25 @@
                     <DataTemplate>
                         <StackPanel 
                             Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                            <TextBlock 
-                                Text="{Binding Name}"
-                                VerticalAlignment="Center"
-                                Margin="10, 0, 0, 0"/>
+                            VerticalAlignment="Center"
+                            Padding="0, 10">
+                            <Image 
+                                Source="{Binding TargetTypeImageUri}"
+                                Height="20"
+                                Width="20"/>
+                            <StackPanel
+                                Orientation="Vertical"
+                                VerticalAlignment="Center">
+                                <TextBlock 
+                                    Text="{Binding Name}"
+                                    VerticalAlignment="Center"
+                                    Margin="10, 0, 0, 0"/>
+                                <TextBlock 
+                                    Text="{Binding FinalProductEnchantments}"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
