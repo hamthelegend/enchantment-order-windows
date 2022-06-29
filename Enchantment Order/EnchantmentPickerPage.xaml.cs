@@ -8,12 +8,15 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BusinessLogic;
+using Enchantment_Order.Annotations;
 using Extensions;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -24,12 +27,31 @@ namespace Enchantment_Order
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class EnchantmentPickerPage : Page
+    public sealed partial class EnchantmentPickerPage : Page, INotifyPropertyChanged
     {
+        private bool _isRefreshing;
 
         public ItemType TargetPicked;
-        public ObservableCollection<Enchantment> BooksPicked = new();
-        public ObservableCollection<Enchantment> AvailableEnchantments = new();
+
+        private List<ItemPresentation> _booksPicked = new();
+        internal List<ItemPresentation> BooksPicked
+        {
+            get => _booksPicked;
+            set { _booksPicked = value; OnPropertyChanged(); }
+        }
+        private List<EnchantmentPresentation> _availableEnchantments = new();
+        internal List<EnchantmentPresentation> AvailableEnchantments
+        {
+            get => _availableEnchantments;
+            set
+            {
+                if (_availableEnchantments.SequenceEqual(value)) return;
+                _availableEnchantments = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        private List<EnchantmentPresentation> _enchantmentsPicked = new();
 
 
         public EnchantmentPickerPage()
@@ -44,16 +66,40 @@ namespace Enchantment_Order
             RefreshList();
         }
 
-        private void RefreshList()
+        private void RefreshList(EnchantmentPresentation enchantmentClicked = null)
         {
-            var bannedEnchantmentTypes = EnchantmentPicker.SelectedItems.SelectMany(x => ((Enchantment)x).Type.IncompatibleEnchantmentTypes).ToList();
+            if (_isRefreshing) return;
+            if (enchantmentClicked != null)
+            {
+                var selectedEnchantment = _enchantmentsPicked.FirstOrDefault(x => enchantmentClicked.String == x.String);
+                if (selectedEnchantment != null)
+                {
+                    _enchantmentsPicked.Remove(selectedEnchantment);
+                }
+                else
+                {
+                    _enchantmentsPicked.Add(enchantmentClicked);
+                }
+            }
+            var bannedEnchantmentTypes = _enchantmentsPicked
+                .SelectMany(x => x.Type.ToEnchantmentType().IncompatibleEnchantmentTypes)
+                .ToList();
             var availableEnchantments = TargetPicked.CompatibleEnchantmentTypes
                 .Select(enchantmentType => new Enchantment(enchantmentType, enchantmentType.MaxLevel))
                 .Where(enchantment => 
                     !bannedEnchantmentTypes.Contains(enchantment.Type) &&
                     enchantment.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
                 .ToList();
-            AvailableEnchantments.ReplaceWith(availableEnchantments);
+            _isRefreshing = true;
+            AvailableEnchantments = availableEnchantments.ToEnchantmentPresentations();
+            foreach (var item in EnchantmentPicker.Items)
+            {
+                if (_enchantmentsPicked.Any(x => ((EnchantmentPresentation)item).String == x.String))
+                {
+                    EnchantmentPicker.SelectedItems.Add(item);
+                }
+            }
+            _isRefreshing = false;
         }
 
 
@@ -67,9 +113,18 @@ namespace Enchantment_Order
             RefreshList();
         }
 
-        private void OnEnchantmentsPickedChanged(object sender, SelectionChangedEventArgs e)
+        private void EnchantmentPicker_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            RefreshList();
+            RefreshList((EnchantmentPresentation)e.ClickedItem);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

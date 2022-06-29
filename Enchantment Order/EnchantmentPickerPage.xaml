@@ -35,8 +35,9 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
                 ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
+                IsItemClickEnabled="True"
                 SelectionMode="Multiple"
-                SelectionChanged="OnEnchantmentsPickedChanged">
+                ItemClick="EnchantmentPicker_OnItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel 

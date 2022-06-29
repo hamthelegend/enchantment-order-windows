@@ -58,7 +58,7 @@ namespace Enchantment_Order
 
         private void OnTargetPicked(object sender, SelectionChangedEventArgs e)
         {
-            Frame.Navigate(typeof(EnchantmentPickerPage), TargetPicker.SelectedItem);
+            Frame.Navigate(typeof(EnchantmentPickerPage), ((ItemTypePresentation)TargetPicker.SelectedItem).ToItemType());
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

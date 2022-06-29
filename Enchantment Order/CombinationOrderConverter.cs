@@ -133,7 +133,11 @@ internal static class CombinationOrderConverter
     internal static EnchantmentTypePresentation ToEnchantmentTypePresentation(this EnchantmentType enchantmentType) =>
         new()
         {
-            FriendlyName = enchantmentType.FriendlyName
+            FriendlyName = enchantmentType.FriendlyName,
+            AbbreviatedName = enchantmentType.AbbreviatedName,
+            BookMultiplier = enchantmentType.BookMultiplier,
+            ItemMultiplier = enchantmentType.ItemMultiplier,
+            MaxLevel = enchantmentType.MaxLevel
         };
 
     internal static EnchantmentType ToEnchantmentType(this EnchantmentTypePresentation enchantmentTypePresentation) =>

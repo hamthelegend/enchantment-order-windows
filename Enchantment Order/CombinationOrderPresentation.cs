@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Extensions;
 
 namespace Enchantment_Order;
 
@@ -41,9 +42,22 @@ public class EnchantmentPresentation
 {
     public EnchantmentTypePresentation Type { get; set; }
     public int Level { get; set; }
+
+    public override string ToString() => $"{Type.FriendlyName} {Level.ToRomanNumerals()}";
+
+    public string String => ToString();
+
+    public string AbbreviatedString => $"{Type.AbbreviatedName} {Level}";
+
+    public string ArabicLevelString => $"{Type.FriendlyName} {Level}";
+
 }
 
 public class EnchantmentTypePresentation
 {
     public string FriendlyName { get; set; }
+    public string AbbreviatedName { get; set; }
+    public int MaxLevel { get; set; }
+    public int ItemMultiplier { get; set; }
+    public int BookMultiplier { get; set; }
 }
