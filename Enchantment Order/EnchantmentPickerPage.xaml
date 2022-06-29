@@ -54,16 +54,16 @@
                             Height="20"
                             Width="20">
                             <Image.Source>
-                                <BitmapImage UriSource="{x:Bind Target.Type.ImageUri, Mode=OneWay}" />
+                                <BitmapImage UriSource="{x:Bind _target.Type.ImageUri, Mode=OneWay}" />
                             </Image.Source>
                         </Image>
                         <StackPanel 
                             Margin="10, 0, 0, 0"
                             VerticalAlignment="Center">
                             <TextBlock 
-                                Text="{x:Bind Target.Type.FriendlyName, Mode=OneWay}"/>
+                                Text="{x:Bind _target.Type.FriendlyName, Mode=OneWay}"/>
                             <TextBlock 
-                                Text="{x:Bind Target.AbbreviatedEnchantmentsString}"
+                                Text="{x:Bind _target.AbbreviatedEnchantmentsString}"
                                 Style="{StaticResource CaptionTextBlockStyle}"/>
                         </StackPanel>
                     </StackPanel>

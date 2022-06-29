@@ -23,12 +23,6 @@
                 VerticalAlignment="Center"/>
             </NavigationView.PaneHeader>
 
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox 
-                x:Name="SearchBox"
-                PlaceholderText="Search"/>
-            </NavigationView.AutoSuggestBox>
-
             <NavigationView.PaneFooter>
                 <Grid>
                     <Button
@@ -54,106 +48,165 @@
 
             <NavigationView.Content>
                 <Grid>
-                    <ListView
-                        x:Name="CombinationOrders"
-                        ItemsSource="{x:Bind Combinations, Mode=OneWay}"
-                        Padding="0, 8">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid 
-                                    Margin="0, 8"
-                                    Padding="10"
-                                    Background="LightGray"
-                                    MaxWidth="500">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="40">
+                        <ProgressRing
+                            x:Name="LoadingIndicator"
+                            IsIndeterminate="True"/>
+                    </StackPanel>
+                    <ScrollViewer
+                        x:Name="Scroller"
+                        Visibility="Collapsed">
+                        <StackPanel>
+                            <ListView
+                                x:Name="CombinationOrders"
+                                ItemsSource="{x:Bind Combinations, Mode=OneWay}"
+                                Padding="0, 8">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid 
+                                            Margin="0, 8"
+                                            Padding="10"
+                                            Background="WhiteSmoke"
+                                            CornerRadius="10"
+                                            MaxWidth="500">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Source="{Binding TargetTypeImageUri}"
+                                                Width="20"
+                                                Height="20"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 10, 10, 0"/>
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Text="+"
+                                                FontWeight="Bold"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 10, 10, 0"/>
+                                            <Image
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                Source="{Binding SacrificeTypeImageUri}"
+                                                Width="20"
+                                                Height="20"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 10, 10, 0"/>
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Text="{Binding TargetTypeName}"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 5, 10, 0"/>
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                Text="{Binding SacrificeTypeName}"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 5, 10, 0"/>
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Text="{Binding TargetEnchantmentsString}"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 0, 10, 0"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                TextWrapping="NoWrap"/>
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Text="{Binding SacrificeEnchantmentsString}"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 0, 10, 0"
+                                                Style="{StaticResource CaptionTextBlockStyle}"
+                                                TextWrapping="NoWrap"/>
+                                            <StackPanel 
+                                                Grid.Column="0"
+                                                Grid.Row="3"
+                                                Grid.ColumnSpan="3"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                Margin="10, 5, 10, 10">
+                                                <TextBlock
+                                                    Text="Cost: "
+                                                    HorizontalAlignment="Center"/>
+                                                <TextBlock
+                                                    Text="{Binding Cost}"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="5, 0, 0, 0"/>
+                                                <Image
+                                                    Grid.Row="0"
+                                                    Grid.Column="2"
+                                                    Source="Assets/xp.png"
+                                                    Width="15"
+                                                    Height="15"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="5, 0, 0, 0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <StackPanel
+                                Margin="0, 0, 0, 16"
+                                Padding="10"
+                                Background="WhiteSmoke"
+                                CornerRadius="10"
+                                MaxWidth="500">
+                                <Image
+                                    Width="20"
+                                    Height="20"
+                                    HorizontalAlignment="Center"
+                                    Margin="10, 10, 10, 0">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{x:Bind FinalProduct.Type.ImageUri, Mode=OneWay}" />
+                                    </Image.Source>
+                                </Image>
+                                <TextBlock
+                                    Text="{x:Bind FinalProduct.Type.FriendlyName, Mode=OneWay}"
+                                    HorizontalAlignment="Center"
+                                    Margin="10, 5, 10, 0"/>
+                                <TextBlock
+                                    Text="{x:Bind FinalProduct.AbbreviatedEnchantmentsString, Mode=OneWay}"
+                                    HorizontalAlignment="Center"
+                                    Margin="10, 0, 10, 0"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    TextWrapping="NoWrap"/>
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Margin="10, 5, 10, 10">
+                                    <TextBlock
+                                        Text="Cost: "
+                                        HorizontalAlignment="Center"/>
+                                    <TextBlock
+                                        Text="{x:Bind TotalCost, Mode=OneWay}"
+                                        HorizontalAlignment="Center"
+                                        Margin="5, 0, 0, 0"/>
                                     <Image
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Source="{Binding TargetTypeImageUri}"
-                                        Width="20"
-                                        Height="20"
+                                        Source="Assets/xp.png"
+                                        Width="15"
+                                        Height="15"
                                         HorizontalAlignment="Center"
-                                        Margin="10, 10, 10, 0"/>
-                                    <TextBlock
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Text="+"
-                                        FontWeight="Bold"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 10, 10, 0"/>
-                                    <Image
-                                        Grid.Row="0"
-                                        Grid.Column="2"
-                                        Source="{Binding SacrificeTypeImageUri}"
-                                        Width="20"
-                                        Height="20"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 10, 10, 0"/>
-                                    <TextBlock
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Text="{Binding TargetTypeName}"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 5, 10, 0"/>
-                                    <TextBlock
-                                        Grid.Row="1"
-                                        Grid.Column="2"
-                                        Text="{Binding SacrificeTypeName}"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 5, 10, 0"/>
-                                    <TextBlock
-                                        Grid.Row="2"
-                                        Grid.Column="0"
-                                        Text="{Binding TargetEnchantmentsString}"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 0, 10, 0"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        TextWrapping="NoWrap"/>
-                                    <TextBlock
-                                        Grid.Row="2"
-                                        Grid.Column="2"
-                                        Text="{Binding SacrificeEnchantmentsString}"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 0, 10, 0"
-                                        Style="{StaticResource CaptionTextBlockStyle}"
-                                        TextWrapping="NoWrap"/>
-                                    <StackPanel 
-                                        Grid.Column="0"
-                                        Grid.Row="3"
-                                        Grid.ColumnSpan="3"
-                                        Orientation="Horizontal"
-                                        HorizontalAlignment="Center"
-                                        Margin="10, 5, 10, 10">
-                                        <TextBlock
-                                            Text="Cost: "
-                                            HorizontalAlignment="Center"/>
-                                        <TextBlock
-                                            Text="{Binding Cost}"
-                                            HorizontalAlignment="Center"
-                                            Margin="5, 0, 0, 0"/>
-                                        <Image
-                                            Grid.Row="0"
-                                            Grid.Column="2"
-                                            Source="Assets/xp.png"
-                                            Width="15"
-                                            Height="15"
-                                            HorizontalAlignment="Center"
-                                            Margin="5, 0, 0, 0"/>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        Margin="5, 0, 0, 0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </NavigationView.Content>
 

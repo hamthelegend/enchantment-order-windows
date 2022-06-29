@@ -31,15 +31,6 @@ namespace Enchantment_Order
     {
 
         private ItemPresentation _target;
-        internal ItemPresentation Target
-        {
-            get => _target;
-            set
-            {
-                _target = value; 
-                OnPropertyChanged();
-            }
-        }
 
 
         private readonly ObservableCollection<ItemPresentation> _booksPicked = new();
@@ -66,7 +57,7 @@ namespace Enchantment_Order
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Target = (ItemPresentation) e.Parameter;
+            _target = (ItemPresentation) e.Parameter;
             RefreshList();
         }
 

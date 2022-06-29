@@ -68,6 +68,18 @@ namespace Enchantment_Order
             }
         }
 
+        private int _totalCost;
+        internal int TotalCost
+        {
+            get => _totalCost;
+            set
+            {
+                if (_totalCost == value) return;
+                _totalCost = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _combinationOrderId = -1;
 
         public ResultPage()
@@ -97,6 +109,8 @@ namespace Enchantment_Order
 
         private async void GetBestOrder(Item target, List<Item> itemsPicked)
         {
+            LoadingIndicator.Visibility = Visibility.Visible;
+            Scroller.Visibility = Visibility.Collapsed;
             var combinationOrder = await Task.Run(() => Anvil.GetBestOrder(target, itemsPicked));
             SetCombinationOrder(combinationOrder.ToCombinationOrderPresentation());
         }
@@ -107,6 +121,9 @@ namespace Enchantment_Order
             CombinationOrderName = combinationOrder.Name;
             _combinationOrderId = combinationOrder.Id;
             FinalProduct = combinationOrder.FinalProduct;
+            TotalCost = combinationOrder.ToCombinationOrder().TotalCost;
+            LoadingIndicator.Visibility = Visibility.Collapsed;
+            Scroller.Visibility = Visibility.Visible;
         }
 
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)

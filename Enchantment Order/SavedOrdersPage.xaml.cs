@@ -49,6 +49,7 @@ namespace Enchantment_Order
             CombinationOrders = _allCombinationOrders
                 .Where(combinationOrder => combinationOrder.Name.ToLower().Contains(SearchBox.Text.ToLower()))
                 .ToList();
+            EmptyIndicator.Visibility = _allCombinationOrders.Any() ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)

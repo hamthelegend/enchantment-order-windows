@@ -101,7 +101,7 @@ public static class Anvil
                         var a = items[indexA];
                         var b = items[indexB];
                         items[indexA] = b;
-                        items[indexA] = a;
+                        items[indexB] = a;
                     } else
                     {
                         const int indexA = 0;
@@ -109,7 +109,7 @@ public static class Anvil
                         var a = items[indexA];
                         var b = items[indexB];
                         items[indexA] = b;
-                        items[indexA] = a;
+                        items[indexB] = a;
                     }
                 }
             }

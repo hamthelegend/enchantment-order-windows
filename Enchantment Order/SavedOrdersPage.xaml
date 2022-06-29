@@ -29,42 +29,55 @@
         </NavigationView.AutoSuggestBox>
 
         <NavigationView.Content>
-            <ListView
-                x:Name="TargetPicker"
-                Grid.Column="0"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                ItemsSource="{x:Bind CombinationOrders, Mode=OneWay}"
-                SelectionMode="None"
-                IsItemClickEnabled="True"
-                ItemClick="OpenSavedOrder">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel 
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            Padding="0, 10">
-                            <Image 
-                                Source="{Binding TargetTypeImageUri}"
-                                Height="20"
-                                Width="20"/>
-                            <StackPanel
-                                Orientation="Vertical"
-                                VerticalAlignment="Center">
-                                <TextBlock 
-                                    Text="{Binding Name}"
-                                    VerticalAlignment="Center"
-                                    Margin="10, 0, 0, 0"/>
-                                <TextBlock 
-                                    Text="{Binding FinalProductEnchantments}"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource CaptionTextBlockStyle}"
-                                    Margin="10, 0, 0, 0"/>
+            <Grid>
+                <StackPanel
+                    x:Name="EmptyIndicator"
+                    Margin="10"
+                    VerticalAlignment="Center">
+                    <SymbolIcon 
+                        Symbol="Clear"
+                        HorizontalAlignment="Center"
+                        Margin="0, 0, 0, 5"/>
+                    <TextBlock 
+                        Text="There are no enchantment orders saved"
+                        HorizontalAlignment="Center"/>
+                </StackPanel>
+                <ListView
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    ItemsSource="{x:Bind CombinationOrders, Mode=OneWay}"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    ItemClick="OpenSavedOrder">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Padding="0, 10">
+                                <Image 
+                                    Source="{Binding TargetTypeImageUri}"
+                                    Height="20"
+                                    Width="20"/>
+                                <StackPanel
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center">
+                                    <TextBlock 
+                                        Text="{Binding Name}"
+                                        VerticalAlignment="Center"
+                                        Margin="10, 0, 0, 0"/>
+                                    <TextBlock 
+                                        Text="{Binding FinalProductEnchantments}"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource CaptionTextBlockStyle}"
+                                        Margin="10, 0, 0, 0"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </NavigationView.Content>
 
     </NavigationView>
