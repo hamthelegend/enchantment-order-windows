@@ -56,9 +56,10 @@ namespace Enchantment_Order
             ItemTypes = searchResult.ToItemTypePresentations();
         }
 
-        private void OnTargetPicked(object sender, SelectionChangedEventArgs e)
+        private void OnTargetPicked(object sender, ItemClickEventArgs e)
         {
-            Frame.Navigate(typeof(EnchantmentPickerPage), ((ItemTypePresentation)TargetPicker.SelectedItem).ToItemType());
+            var target = (ItemTypePresentation)e.ClickedItem;
+            Frame.Navigate(typeof(InitialEnchantmentPickerPage), target);
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -68,5 +69,6 @@ namespace Enchantment_Order
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

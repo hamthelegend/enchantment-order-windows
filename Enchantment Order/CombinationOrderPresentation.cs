@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 using Extensions;
 
 namespace Enchantment_Order;
@@ -28,6 +29,40 @@ public class ItemPresentation
     public ItemTypePresentation Type { get; set; }
     public List<EnchantmentPresentation> Enchantments { get; set; }
     public int AnvilUseCount { get; set; }
+
+    public string EnchantmentsString
+    {
+        get
+        {
+            var stringBuilder = new StringBuilder();
+            for (var i = 0; i < Enchantments.Count; i++)
+            {
+                if (i != 0)
+                {
+                    stringBuilder.Append(", ");
+                }
+                stringBuilder.Append(Enchantments[i]);
+            }
+            return stringBuilder.ToString();
+        }
+    }
+
+    public string AbbreviatedEnchantmentsString
+    {
+        get
+        {
+            var stringBuilder = new StringBuilder();
+            for (var i = 0; i < Enchantments.Count; i++)
+            {
+                if (i != 0)
+                {
+                    stringBuilder.Append(", ");
+                }
+                stringBuilder.Append(Enchantments[i].AbbreviatedString);
+            }
+            return stringBuilder.ToString();
+        }
+    }
 }
 
 public class ItemTypePresentation

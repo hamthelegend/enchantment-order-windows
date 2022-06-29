@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
 
     <NavigationView
         IsBackButtonVisible="Visible"
@@ -17,7 +18,7 @@
 
         <NavigationView.PaneHeader>
             <TextBlock
-                Text="Select Target"
+                Text="Select enchantments"
                 VerticalAlignment="Center"/>
         </NavigationView.PaneHeader>
 
@@ -28,29 +29,77 @@
                 TextChanged="Search"/>
         </NavigationView.AutoSuggestBox>
 
+        <NavigationView.PaneFooter>
+            <Button
+                VerticalAlignment="Stretch"
+                Margin="0, 8">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" Glyph="&#xE72A;"
+                    FontSize="12"/>
+            </Button>
+        </NavigationView.PaneFooter>
+
         <NavigationView.Content>
-            <ListView
-                x:Name="EnchantmentPicker"
-                Grid.Column="0"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
-                IsItemClickEnabled="True"
-                SelectionMode="Multiple"
-                ItemClick="EnchantmentPicker_OnItemClick">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel 
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                            <TextBlock 
-                                Text="{Binding String}"
-                                VerticalAlignment="Center"
-                                Margin="10, 0, 0, 0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="Custom Books" Margin="15, 10" FontWeight="Medium"/>
+                    <ListView
+                        ItemsSource="{x:Bind _booksPicked}"
+                        IsItemClickEnabled="True"
+                        ItemClick="OnBookClicked">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image 
+                                        Grid.Column="0"
+                                        Source="Assets/book_enchanted.png"
+                                        Height="20"
+                                        Width="20"/>
+                                    <TextBlock 
+                                        Grid.Column="1"
+                                        Text="{Binding AbbreviatedEnchantmentsString}"
+                                        VerticalAlignment="Center"
+                                        Margin="10, 0, 0, 0"/>
+                                    <FontIcon
+                                        Grid.Column="2"
+                                        FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;"
+                                        FontSize="12"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button 
+                        Content="Add a custom book" 
+                        Margin="15, 10"
+                        HorizontalAlignment="Stretch"
+                        Click="AddCustomBook"/>
+                    <TextBlock Text="Enchantments" Margin="15, 10" FontWeight="Medium"/>
+                    <ListView
+                        x:Name="EnchantmentPicker"
+                        ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
+                        IsItemClickEnabled="True"
+                        SelectionMode="Multiple"
+                        ItemClick="OnEnchantmentClicked">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel 
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <TextBlock 
+                                        Text="{Binding String}"
+                                        VerticalAlignment="Center"
+                                        Margin="10, 0, 0, 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </ScrollViewer>
         </NavigationView.Content>
 
     </NavigationView>

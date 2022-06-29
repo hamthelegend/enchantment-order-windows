@@ -15,7 +15,7 @@ public record Item(
         {
             if (i != 0)
             {
-                stringBuilder.Append($", ");
+                stringBuilder.Append(", ");
             }
             stringBuilder.Append(Enchantments[i]);
         }
@@ -75,6 +75,18 @@ public record Item(
             }
         }
         return false;
+    }
+
+    public Item SupposedProduct(List<Item> books)
+    {
+        var item = this;
+        foreach (var book in books)
+        {
+            var product = (item + book).Product;
+            item = product;
+        }
+
+        return item;
     }
 
     public bool HasNoCompatibleEnchantmentsWith(Item target) => !HasCompatibleEnchantmentsWith(target);

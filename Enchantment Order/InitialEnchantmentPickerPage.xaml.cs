@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -17,7 +16,6 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BusinessLogic;
 using Enchantment_Order.Annotations;
-using Extensions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,13 +25,12 @@ namespace Enchantment_Order
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class EnchantmentPickerPage : Page, INotifyPropertyChanged
+    public sealed partial class InitialEnchantmentPickerPage : Page, INotifyPropertyChanged
     {
         private bool _isRefreshing;
 
-        private ItemPresentation _target;
+        private ItemTypePresentation _target;
 
-        private readonly ObservableCollection<ItemPresentation> _booksPicked = new();
         private List<EnchantmentPresentation> _availableEnchantments = new();
         internal List<EnchantmentPresentation> AvailableEnchantments
         {
@@ -41,35 +38,58 @@ namespace Enchantment_Order
             set
             {
                 if (_availableEnchantments.SequenceEqual(value)) return;
-                _availableEnchantments = value; 
+                _availableEnchantments = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<EnchantmentPresentation> _enchantmentsPicked = new();
-
-
-        public EnchantmentPickerPage()
+        public InitialEnchantmentPickerPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
+
+        private void RestrictNonDigits(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+
+        private readonly List<EnchantmentPresentation> _enchantmentsPicked = new();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _target = (ItemPresentation) e.Parameter;
+            _target = (ItemTypePresentation)e.Parameter;
             RefreshList();
         }
 
-        private void RefreshList()
+        private void RefreshList(EnchantmentPresentation enchantmentClicked = null)
         {
             if (_isRefreshing) return;
-            var supposedProduct = _target.ToItem().SupposedProduct(_booksPicked.ToList().ToItems());
-            var availableEnchantments = _target.Type.CompatibleEnchantmentTypes
-                .Select(enchantmentType => new Enchantment(enchantmentType.ToEnchantmentType(), enchantmentType.MaxLevel))
+            if (enchantmentClicked != null)
+            {
+                var selectedEnchantment = _enchantmentsPicked.FirstOrDefault(x => enchantmentClicked.String == x.String);
+                if (selectedEnchantment != null)
+                {
+                    _enchantmentsPicked.Remove(selectedEnchantment);
+                }
+                else
+                {
+                    _enchantmentsPicked.Add(enchantmentClicked);
+                }
+            }
+            var availableEnchantments = _target.CompatibleEnchantmentTypes
+                .SelectMany(enchantmentType =>
+                {
+                    var enchantments = new List<Enchantment>();
+                    for (var level = 1; level <= enchantmentType.MaxLevel; level++)
+                    {
+                        enchantments.Add(new Enchantment(enchantmentType.ToEnchantmentType(), level));
+                    }
+                    return enchantments;
+                })
                 .Where(enchantment =>
                     enchantment.Type.IsCompatibleWith(_enchantmentsPicked.ToEnchantments().Select(x => x.Type).ToList()) &&
-                    new List<Enchantment> { enchantment }.ToEnchantedBook().HasCompatibleEnchantmentsWith(supposedProduct) &&
+                    !_enchantmentsPicked.Any(x => enchantment.Type == x.Type.ToEnchantmentType() && enchantment.Level != x.Level) &&
                     enchantment.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
                 .ToList();
             _isRefreshing = true;
@@ -95,39 +115,27 @@ namespace Enchantment_Order
             RefreshList();
         }
 
-        private void AddCustomBook(object sender, RoutedEventArgs e)
+        private async void Next(object sender, RoutedEventArgs e)
         {
-            var allBooks = _booksPicked.ToList().ToItems();
-            allBooks.AddRange(_enchantmentsPicked.ToEnchantments().Select(x => new List<Enchantment> {x}.ToEnchantedBook()));
-            var supposedProduct = _target.ToItem().SupposedProduct(allBooks).ToItemPresentation();
-            Frame.Navigate(typeof(AddCustomBooksPage), new AddCustomBookParameters(supposedProduct, bookAdded => _booksPicked.Add(bookAdded)));
-        }
-
-        private void OnBookClicked(object sender, ItemClickEventArgs e)
-        {
-            var bookClicked = (ItemPresentation)e.ClickedItem;
-            if (bookClicked != null)
+            if (_enchantmentsPicked.Count <= 0)
             {
-                _booksPicked.Remove(bookClicked);
+                Frame.Navigate(typeof(EnchantmentPickerPage), _target.ToItemType().ToNewItem().ToItemPresentation());
             }
-        }
-
-        private void OnEnchantmentClicked(object sender, ItemClickEventArgs e)
-        {
-            var enchantmentClicked = (EnchantmentPresentation)e.ClickedItem;
-            if (enchantmentClicked != null)
+            else
             {
-                var selectedEnchantment = _enchantmentsPicked.FirstOrDefault(x => enchantmentClicked.String == x.String);
-                if (selectedEnchantment != null)
+                var response = await AddInitialEnchantmentsDialog.ShowAsync();
+                if (response == ContentDialogResult.Primary)
                 {
-                    _enchantmentsPicked.Remove(selectedEnchantment);
-                }
-                else
-                {
-                    _enchantmentsPicked.Add(enchantmentClicked);
+                    var renamingCost = !string.IsNullOrWhiteSpace(RenamingCostField.Text) ? Convert.ToInt32(RenamingCostField.Text) : 1;
+                    var target = new Item(_target.ToItemType(), _enchantmentsPicked.ToEnchantments(), renamingCost.RenameCostToAnvilUseCount()).ToItemPresentation();
+                    Frame.Navigate(typeof(EnchantmentPickerPage), target);
                 }
             }
-            RefreshList();
+        }
+
+        private void EnchantmentPicker_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            RefreshList((EnchantmentPresentation)e.ClickedItem);
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
@@ -137,7 +145,6 @@ namespace Enchantment_Order
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
     }
 }

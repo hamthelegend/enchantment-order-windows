@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -17,23 +16,23 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BusinessLogic;
 using Enchantment_Order.Annotations;
-using Extensions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Enchantment_Order
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class EnchantmentPickerPage : Page, INotifyPropertyChanged
+
+    public record AddCustomBookParameters(
+        ItemPresentation SupposedProduct,
+        Action<ItemPresentation> AddBook);
+
+    public sealed partial class AddCustomBooksPage : Page, INotifyPropertyChanged
     {
-        private bool _isRefreshing;
 
-        private ItemPresentation _target;
+        private ItemPresentation _supposedProduct;
+        private Action<ItemPresentation> _addBook;
 
-        private readonly ObservableCollection<ItemPresentation> _booksPicked = new();
         private List<EnchantmentPresentation> _availableEnchantments = new();
         internal List<EnchantmentPresentation> AvailableEnchantments
         {
@@ -41,38 +40,49 @@ namespace Enchantment_Order
             set
             {
                 if (_availableEnchantments.SequenceEqual(value)) return;
-                _availableEnchantments = value; 
+                _availableEnchantments = value;
                 OnPropertyChanged();
             }
         }
 
-        private List<EnchantmentPresentation> _enchantmentsPicked = new();
-
-
-        public EnchantmentPickerPage()
+        public AddCustomBooksPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
+
+        private void RestrictNonDigits(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+
+        private readonly List<EnchantmentPresentation> _enchantmentsPicked = new();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _target = (ItemPresentation) e.Parameter;
+            var parameters = (AddCustomBookParameters)e.Parameter;
+            _supposedProduct = parameters.SupposedProduct;
+            _addBook = parameters.AddBook;
             RefreshList();
         }
 
         private void RefreshList()
         {
-            if (_isRefreshing) return;
-            var supposedProduct = _target.ToItem().SupposedProduct(_booksPicked.ToList().ToItems());
-            var availableEnchantments = _target.Type.CompatibleEnchantmentTypes
-                .Select(enchantmentType => new Enchantment(enchantmentType.ToEnchantmentType(), enchantmentType.MaxLevel))
+            var availableEnchantments = EnchantmentType.All
+                .SelectMany(enchantmentType =>
+                {
+                    var enchantments = new List<Enchantment>();
+                    for (var level = 1; level <= enchantmentType.MaxLevel; level++)
+                    {
+                        enchantments.Add(new Enchantment(enchantmentType, level));
+                    }
+                    return enchantments;
+                })
                 .Where(enchantment =>
                     enchantment.Type.IsCompatibleWith(_enchantmentsPicked.ToEnchantments().Select(x => x.Type).ToList()) &&
-                    new List<Enchantment> { enchantment }.ToEnchantedBook().HasCompatibleEnchantmentsWith(supposedProduct) &&
+                    !_enchantmentsPicked.Any(x => enchantment.Type == x.Type.ToEnchantmentType() && enchantment.Level != x.Level) &&
                     enchantment.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
                 .ToList();
-            _isRefreshing = true;
             AvailableEnchantments = availableEnchantments.ToEnchantmentPresentations();
             foreach (var item in EnchantmentPicker.Items)
             {
@@ -81,7 +91,6 @@ namespace Enchantment_Order
                     EnchantmentPicker.SelectedItems.Add(item);
                 }
             }
-            _isRefreshing = false;
         }
 
 
@@ -95,21 +104,14 @@ namespace Enchantment_Order
             RefreshList();
         }
 
-        private void AddCustomBook(object sender, RoutedEventArgs e)
+        private async void AddCustomBook(object sender, RoutedEventArgs e)
         {
-            var allBooks = _booksPicked.ToList().ToItems();
-            allBooks.AddRange(_enchantmentsPicked.ToEnchantments().Select(x => new List<Enchantment> {x}.ToEnchantedBook()));
-            var supposedProduct = _target.ToItem().SupposedProduct(allBooks).ToItemPresentation();
-            Frame.Navigate(typeof(AddCustomBooksPage), new AddCustomBookParameters(supposedProduct, bookAdded => _booksPicked.Add(bookAdded)));
-        }
-
-        private void OnBookClicked(object sender, ItemClickEventArgs e)
-        {
-            var bookClicked = (ItemPresentation)e.ClickedItem;
-            if (bookClicked != null)
-            {
-                _booksPicked.Remove(bookClicked);
-            }
+            var response = await AddCustomBookDialog.ShowAsync();
+            if (response != ContentDialogResult.Primary) return;
+            var renamingCost = !string.IsNullOrWhiteSpace(RenamingCostField.Text) ? Convert.ToInt32(RenamingCostField.Text) : 1;
+            var book = new Item(ItemType.EnchantedBook, _enchantmentsPicked.ToEnchantments(), renamingCost.RenameCostToAnvilUseCount()).ToItemPresentation();
+            _addBook(book);
+            Frame.GoBack();
         }
 
         private void OnEnchantmentClicked(object sender, ItemClickEventArgs e)
@@ -127,6 +129,9 @@ namespace Enchantment_Order
                     _enchantmentsPicked.Add(enchantmentClicked);
                 }
             }
+
+            var newBook = new List<Enchantment>(_enchantmentsPicked.ToEnchantments()).ToEnchantedBook();
+            AddBookButton.IsEnabled = newBook.HasCompatibleEnchantmentsWith(_supposedProduct.ToItem());
             RefreshList();
         }
 
@@ -137,7 +142,5 @@ namespace Enchantment_Order
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }

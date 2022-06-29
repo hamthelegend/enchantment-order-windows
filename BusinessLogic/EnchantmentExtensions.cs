@@ -3,7 +3,7 @@
 public static class EnchantmentExtensions
 {
     public static Item ToNewItem(this ItemType itemType, List<Enchantment>? enchantments = null) =>
-        new Item(Type: itemType, Enchantments: enchantments ?? new List<Enchantment>(), AnvilUseCount: 0);
+        new(Type: itemType, Enchantments: enchantments ?? new List<Enchantment>(), AnvilUseCount: 0);
     
     public static Item ToEnchantedBook(this IEnumerable<Enchantment> enchantments) =>
         new(ItemType.EnchantedBook, enchantments.ToList());

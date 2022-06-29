@@ -27,7 +27,7 @@ internal static class CombinationOrderConverter
             .Select(combinationOrder => combinationOrder.ToCombinationOrderPresentation())
             .ToList();
     
-    internal static List<CombinationOrder> ToCombinationOrderPresentations(this List<CombinationOrderPresentation> combinationOrderPresentations) =>
+    internal static List<CombinationOrder> ToCombinationOrders(this List<CombinationOrderPresentation> combinationOrderPresentations) =>
         combinationOrderPresentations
             .Select(combinationOrderPresentation => combinationOrderPresentation.ToCombinationOrder())
             .ToList();
@@ -53,7 +53,7 @@ internal static class CombinationOrderConverter
             .Select(combination => combination.ToCombinationPresentation())
             .ToList();
     
-    internal static List<Combination> ToCombinationPresentations(this List<CombinationPresentation> combinationPresentations) =>
+    internal static List<Combination> ToCombinations(this List<CombinationPresentation> combinationPresentations) =>
         combinationPresentations
             .Select(combinationPresentation => combinationPresentation.ToCombination())
             .ToList();
@@ -77,7 +77,7 @@ internal static class CombinationOrderConverter
             .Select(item => item.ToItemPresentation())
             .ToList();
     
-    internal static List<Item> ToItemPresentations(this List<ItemPresentation> itemPresentations) =>
+    internal static List<Item> ToItems(this List<ItemPresentation> itemPresentations) =>
         itemPresentations
             .Select(itemPresentation => itemPresentation.ToItem())
             .ToList();
@@ -120,7 +120,7 @@ internal static class CombinationOrderConverter
             .Select(itemType => itemType.ToItemTypePresentation())
             .ToList();
     
-    internal static List<ItemType> ToItemTypePresentations(this List<ItemTypePresentation> itemTypePresentations) =>
+    internal static List<ItemType> ToItemTypes(this List<ItemTypePresentation> itemTypePresentations) =>
         itemTypePresentations
             .Select(itemTypePresentation => itemTypePresentation.ToItemType())
             .ToList();
@@ -142,7 +142,7 @@ internal static class CombinationOrderConverter
             .Select(enchantment => enchantment.ToEnchantmentPresentation())
             .ToList();
     
-    internal static List<Enchantment> ToEnchantmentPresentations(this List<EnchantmentPresentation> enchantmentPresentations) =>
+    internal static List<Enchantment> ToEnchantments(this List<EnchantmentPresentation> enchantmentPresentations) =>
         enchantmentPresentations
             .Select(enchantmentPresentation => enchantmentPresentation.ToEnchantment())
             .ToList();
@@ -165,7 +165,7 @@ internal static class CombinationOrderConverter
             .Select(enchantmentType => enchantmentType.ToEnchantmentTypePresentation())
             .ToList();
     
-    internal static List<EnchantmentType> ToEnchantmentTypePresentations(this List<EnchantmentTypePresentation> enchantmentTypePresentations) =>
+    internal static List<EnchantmentType> ToEnchantmentTypes(this List<EnchantmentTypePresentation> enchantmentTypePresentations) =>
         enchantmentTypePresentations
             .Select(enchantmentTypePresentation => enchantmentTypePresentation.ToEnchantmentType())
             .ToList();

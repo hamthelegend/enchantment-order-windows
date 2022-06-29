@@ -414,18 +414,6 @@ public record ItemType(
 
     public bool IsIncompatibleWith(ItemType target) => !IsCompatibleWith(target);
 
-    public Item SupposedProduct(List<Item> books)
-    {
-        var item = this.ToNewItem();
-        foreach (var book in books)
-        {
-            var product = (item + book).Product;
-            item = product;
-        }
-
-        return item;
-    }
-
     public static List<ItemType> Targetable = ItemType.All.Where(item => item != EnchantedBook).ToList();
 
 }

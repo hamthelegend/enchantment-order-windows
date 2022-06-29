@@ -34,6 +34,7 @@
     <Content Remove="Assets\xp.webp" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="AddCustomBooksPage.xaml" />
     <None Remove="Assets\axe.png" />
     <None Remove="Assets\book.png" />
     <None Remove="Assets\book_enchanted.png" />
@@ -59,6 +60,7 @@
     <None Remove="Assets\xp.png" />
     <None Remove="EnchantmentPickerPage.xaml" />
     <None Remove="HomePage.xaml" />
+    <None Remove="InitialEnchantmentPickerPage.xaml" />
     <None Remove="TargetPickerPage.xaml" />
   </ItemGroup>
 
@@ -191,5 +193,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Remove="EnchantmentPickerPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AddCustomBooksPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="InitialEnchantmentPickerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="Enchantment_Order.AddCustomBooksPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Enchantment_Order"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <NavigationView
+            IsBackButtonVisible="Visible"
+            IsBackEnabled="True"
+            PaneDisplayMode="Top"
+            IsSettingsVisible="False"
+            BackRequested="GoBack">
+
+            <NavigationView.PaneHeader>
+                <TextBlock
+                Text="Select initial enchantments"
+                VerticalAlignment="Center"/>
+            </NavigationView.PaneHeader>
+
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox 
+                x:Name="SearchBox"
+                PlaceholderText="Search"
+                TextChanged="Search"/>
+            </NavigationView.AutoSuggestBox>
+
+            <NavigationView.PaneFooter>
+                <Button
+                    x:Name="AddBookButton"
+                    VerticalAlignment="Stretch"
+                    Margin="0, 8"
+                    Click="AddCustomBook"
+                    IsEnabled="False">
+                    <FontIcon 
+                        FontFamily="Segoe MDL2 Assets" Glyph="&#xE72A;"
+                        FontSize="12"/>
+                </Button>
+            </NavigationView.PaneFooter>
+
+            <NavigationView.Content>
+                <ListView
+                    x:Name="EnchantmentPicker"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
+                    IsItemClickEnabled="True"
+                    SelectionMode="Multiple"
+                    ItemClick="OnEnchantmentClicked">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel 
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                                <TextBlock 
+                                    Text="{Binding String}"
+                                    VerticalAlignment="Center"
+                                    Margin="10, 0, 0, 0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </NavigationView.Content>
+
+        </NavigationView>
+
+        <ContentDialog
+            x:Name="AddCustomBookDialog"
+            Title="Add custom book"
+            PrimaryButtonText="Add"
+            CloseButtonText="Cancel">
+            <StackPanel>
+                <TextBlock 
+                    Text="Renaming cost"
+                    Margin="0, 0, 0, 10"
+                    Style="{StaticResource CaptionTextBlockStyle}"/>
+                <TextBox
+                    x:Name="RenamingCostField"
+                    PlaceholderText="1"
+                    BeforeTextChanging="RestrictNonDigits"/>
+            </StackPanel>
+        </ContentDialog>
+
+    </Grid>
+
+</Page>

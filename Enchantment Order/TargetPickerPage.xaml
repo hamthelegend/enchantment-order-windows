@@ -35,8 +35,9 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
                 ItemsSource="{x:Bind ItemTypes, Mode=OneWay}"
-                SelectionMode="Single"
-                SelectionChanged="OnTargetPicked">
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                ItemClick="OnTargetPicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel 
