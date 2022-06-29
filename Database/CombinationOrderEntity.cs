@@ -5,44 +5,44 @@ using BusinessLogic;
 namespace Database;
 
 [Table("CombinationOrderEntities")]
-internal class CombinationOrderEntity
+public class CombinationOrderEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    internal List<CombinationEntity> Combinations { get; set; }
-    internal string Name { get; set; }
+    public string Combinations { get; set; }
+    public string Name { get; set; }
 }
 
-internal class CombinationEntity
+public class CombinationEntity
 {
 
-    internal ItemEntity Target { get; set; }
-    internal ItemEntity Sacrifice { get; set; }
-    internal ItemEntity Product { get; set; }
-    internal int Cost { get; set; }
+    public ItemEntity Target { get; set; }
+    public ItemEntity Sacrifice { get; set; }
+    public ItemEntity Product { get; set; }
+    public int Cost { get; set; }
 
 }
 
-internal class ItemEntity
+public class ItemEntity
 {
-    internal ItemTypeEntity Type { get; set; }
-    internal List<EnchantmentEntity> Enchantments { get; set; }
-    internal int AnvilUseCount { get; set; }
+    public ItemTypeEntity Type { get; set; }
+    public List<EnchantmentEntity> Enchantments { get; set; }
+    public int AnvilUseCount { get; set; }
 }
 
-internal class ItemTypeEntity
+public class ItemTypeEntity
 {
-    internal string FriendlyName { get; set; }
+    public string FriendlyName { get; set; }
 }
 
-internal class EnchantmentEntity
+public class EnchantmentEntity
 {
-    internal EnchantmentTypeEntity Type { get; set; }
-    internal int Level { get; set; }
+    public EnchantmentTypeEntity Type { get; set; }
+    public int Level { get; set; }
 }
 
-internal class EnchantmentTypeEntity
+public class EnchantmentTypeEntity
 {
-    internal string FriendlyName { get; set; }
+    public string FriendlyName { get; set; }
 }

@@ -366,7 +366,6 @@ public record EnchantmentType(
         this == AquaAffinity ? new List<EnchantmentType>() :
         this == BaneOfArthropods ? new List<EnchantmentType> { Sharpness, Smite } :
         this == BlastProtection ? new List<EnchantmentType> { FireProtection, ProjectileProtection, Protection } :
-        // TODO: Enumerate the remain incompatible enchantment types
         this == Channeling ? new List<EnchantmentType> {Riptide} :
         this == CurseOfBinding ? new List<EnchantmentType>() :
         this == CurseOfVanishing ? new List<EnchantmentType>() :

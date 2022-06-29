@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using System.Text.Json;
+using BusinessLogic;
 
 namespace Database;
 
@@ -9,8 +10,8 @@ internal static class CombinationOrderConverter
     {
         var entity = new CombinationOrderEntity
         {
-            Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity())
-                .ToList(),
+            Combinations = JsonSerializer.
+                Serialize(combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity()).ToList()),
             Name = combinationOrder.Name
         };
         if (combinationOrder.Id != -1)
@@ -23,7 +24,9 @@ internal static class CombinationOrderConverter
     internal static CombinationOrder ToCombinationOrder(this CombinationOrderEntity combinationOrderEntity) =>
         new(
             id: combinationOrderEntity.Id,
-            combinations: combinationOrderEntity.Combinations.Select(combinationEntity => combinationEntity.ToCombination()).ToList(),
+            combinations: JsonSerializer
+                .Deserialize<List<CombinationEntity>>(combinationOrderEntity.Combinations)
+                .Select(combinationEntity => combinationEntity.ToCombination()).ToList(),
             name: combinationOrderEntity.Name);
     
     internal static CombinationEntity ToCombinationEntity(this Combination combination) =>

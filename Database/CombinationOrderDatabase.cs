@@ -31,7 +31,6 @@ public static class CombinationOrderDatabase
         using var context = new CombinationOrderContext();
         var entity = context.CombinationOrderEntities.FirstOrDefault(entity => entity.Id == combinationOrder.Id);
         if (entity == null) throw new EntityDoesNotExistException(combinationOrder.Id);
-        entity.Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity()).ToList();
         entity.Name = combinationOrder.Name;
         context.SaveChanges();
     }
