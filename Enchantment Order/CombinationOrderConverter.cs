@@ -13,7 +13,8 @@ internal static class CombinationOrderConverter
         {
             Id = combinationOrder.Id,
             Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationPresentation()).ToList(),
-            Name = combinationOrder.Name
+            Name = combinationOrder.Name,
+            FinalProduct = combinationOrder.FinalProduct.ToItemPresentation()
         };
 
     internal static CombinationOrder ToCombinationOrder(this CombinationOrderPresentation combinationOrderPresentation) =>

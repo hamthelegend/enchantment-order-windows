@@ -32,5 +32,10 @@ namespace Enchantment_Order
         {
             Frame.Navigate(typeof(TargetPickerPage));
         }
+
+        private void ShowSavedOrders(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SavedOrdersPage));
+        }
     }
 }

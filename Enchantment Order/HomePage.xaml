@@ -36,7 +36,8 @@
             <Button
                 Content="Saved orders"
                 HorizontalAlignment="Stretch"
-                Margin="20, 5, 20, 20"/>
+                Margin="20, 5, 20, 20"
+                Click="ShowSavedOrders"/>
 
         </StackPanel>
 

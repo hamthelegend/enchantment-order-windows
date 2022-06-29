@@ -5,6 +5,7 @@ namespace Database;
 internal class CombinationOrderContext : DbContext
 {
     internal DbSet<CombinationOrderEntity> CombinationOrderEntities { get; set; }
+
     private string DbPath { get; }
     
     public CombinationOrderContext()

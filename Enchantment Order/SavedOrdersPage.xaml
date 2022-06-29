@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="Enchantment_Order.SavedOrdersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Enchantment_Order"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <NavigationView
+        IsBackButtonVisible="Visible"
+        IsBackEnabled="True"
+        PaneDisplayMode="Top"
+        IsSettingsVisible="False"
+        BackRequested="GoBack">
+
+        <NavigationView.PaneHeader>
+            <TextBlock
+                Text="Select Target"
+                VerticalAlignment="Center"/>
+        </NavigationView.PaneHeader>
+
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox 
+                x:Name="SearchBox"
+                PlaceholderText="Search"
+                TextChanged="Search"/>
+        </NavigationView.AutoSuggestBox>
+
+        <NavigationView.Content>
+            <ListView
+                x:Name="TargetPicker"
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                ItemsSource="{x:Bind CombinationOrders, Mode=OneWay}"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                ItemClick="OpenSavedOrder">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel 
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                            <Image 
+                                Source="{Binding ImageUri}"
+                                Height="20"
+                                Width="20"/>
+                            <TextBlock 
+                                Text="{Binding FriendlyName}"
+                                VerticalAlignment="Center"
+                                Margin="10, 0, 0, 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </NavigationView.Content>
+
+    </NavigationView>
+
+</Page>

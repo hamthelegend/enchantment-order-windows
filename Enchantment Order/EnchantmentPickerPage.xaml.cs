@@ -29,7 +29,6 @@ namespace Enchantment_Order
     /// </summary>
     public sealed partial class EnchantmentPickerPage : Page, INotifyPropertyChanged
     {
-        private bool _isRefreshing;
 
         private ItemPresentation _target;
 
@@ -63,7 +62,6 @@ namespace Enchantment_Order
 
         private void RefreshList()
         {
-            if (_isRefreshing) return;
             var supposedProduct = _target.ToItem().SupposedProduct(_booksPicked.ToList().ToItems());
             var availableEnchantments = _target.Type.CompatibleEnchantmentTypes
                 .Select(enchantmentType => new Enchantment(enchantmentType.ToEnchantmentType(), enchantmentType.MaxLevel))
@@ -72,7 +70,6 @@ namespace Enchantment_Order
                     new List<Enchantment> { enchantment }.ToEnchantedBook().HasCompatibleEnchantmentsWith(supposedProduct) &&
                     enchantment.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
                 .ToList();
-            _isRefreshing = true;
             AvailableEnchantments = availableEnchantments.ToEnchantmentPresentations();
             foreach (var item in EnchantmentPicker.Items)
             {
@@ -81,12 +78,15 @@ namespace Enchantment_Order
                     EnchantmentPicker.SelectedItems.Add(item);
                 }
             }
-            _isRefreshing = false;
+
+            GetBestOrderButton.IsEnabled = _booksPicked.Any() || _enchantmentsPicked.Any();
         }
 
 
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
+            _booksPicked.Clear();
+            _enchantmentsPicked.Clear();
             Frame.GoBack();
         }
 
@@ -110,6 +110,15 @@ namespace Enchantment_Order
             {
                 _booksPicked.Remove(bookClicked);
             }
+            RefreshList();
+        }
+
+        private void GetBestOrder(object sender, RoutedEventArgs e)
+        {
+            var allBooks = new List<ItemPresentation>(_booksPicked);
+            allBooks.AddRange(_enchantmentsPicked.Select(x => new List<Enchantment> { x.ToEnchantment() }.ToEnchantedBook().ToItemPresentation()));
+            var resultPageParameters = new ResultPageParameters(_target, allBooks);
+            Frame.Navigate(typeof(ResultPage), resultPageParameters);
         }
 
         private void OnEnchantmentClicked(object sender, ItemClickEventArgs e)
@@ -137,7 +146,6 @@ namespace Enchantment_Order
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
     }
 }

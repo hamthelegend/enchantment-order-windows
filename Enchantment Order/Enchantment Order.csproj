@@ -61,6 +61,8 @@
     <None Remove="EnchantmentPickerPage.xaml" />
     <None Remove="HomePage.xaml" />
     <None Remove="InitialEnchantmentPickerPage.xaml" />
+    <None Remove="ResultPage.xaml" />
+    <None Remove="SavedOrdersPage.xaml" />
     <None Remove="TargetPickerPage.xaml" />
   </ItemGroup>
 
@@ -193,6 +195,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Remove="EnchantmentPickerPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SavedOrdersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ResultPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AddCustomBooksPage.xaml">

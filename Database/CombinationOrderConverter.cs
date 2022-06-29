@@ -4,14 +4,21 @@ namespace Database;
 
 internal static class CombinationOrderConverter
 {
-    
-    internal static CombinationOrderEntity ToCombinationOrderEntity(this CombinationOrder combinationOrder) =>
-        new()
+
+    internal static CombinationOrderEntity ToCombinationOrderEntity(this CombinationOrder combinationOrder) 
+    {
+        var entity = new CombinationOrderEntity
         {
-            Id = combinationOrder.Id,
-            Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity()).ToList(),
+            Combinations = combinationOrder.Combinations.Select(combination => combination.ToCombinationEntity())
+                .ToList(),
             Name = combinationOrder.Name
         };
+        if (combinationOrder.Id != -1)
+        {
+            entity.Id = combinationOrder.Id;
+        }
+        return entity;
+    }
 
     internal static CombinationOrder ToCombinationOrder(this CombinationOrderEntity combinationOrderEntity) =>
         new(

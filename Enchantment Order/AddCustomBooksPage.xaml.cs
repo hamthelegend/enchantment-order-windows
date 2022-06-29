@@ -93,7 +93,6 @@ namespace Enchantment_Order
             }
         }
 
-
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             Frame.GoBack();

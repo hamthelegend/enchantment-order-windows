@@ -19,7 +19,7 @@
 
             <NavigationView.PaneHeader>
                 <TextBlock
-                Text="Select initial enchantments"
+                Text="Add a custom book"
                 VerticalAlignment="Center"/>
             </NavigationView.PaneHeader>
 

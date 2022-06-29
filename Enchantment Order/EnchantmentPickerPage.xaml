@@ -31,8 +31,11 @@
 
         <NavigationView.PaneFooter>
             <Button
+                x:Name="GetBestOrderButton"
                 VerticalAlignment="Stretch"
-                Margin="0, 8">
+                Margin="0, 8"
+                Click="GetBestOrder"
+                IsEnabled="False">
                 <FontIcon 
                     FontFamily="Segoe MDL2 Assets" Glyph="&#xE72A;"
                     FontSize="12"/>

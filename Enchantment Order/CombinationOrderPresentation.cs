@@ -12,13 +12,20 @@ public class CombinationOrderPresentation
     public int Id { get; set; }
     public List<CombinationPresentation> Combinations { get; set; }
     public string Name { get; set; }
+    public ItemPresentation FinalProduct { get; set; }
 }
 
 public class CombinationPresentation
 {
 
     public ItemPresentation Target { get; set; }
+    public Uri TargetTypeImageUri => Target.Type.ImageUri;
+    public string TargetTypeName => Target.Type.FriendlyName;
+    public string TargetEnchantmentsString => Target.AbbreviatedEnchantmentsString;
     public ItemPresentation Sacrifice { get; set; }
+    public Uri SacrificeTypeImageUri => Sacrifice.Type.ImageUri;
+    public string SacrificeTypeName => Sacrifice.Type.FriendlyName;
+    public string SacrificeEnchantmentsString => Sacrifice.AbbreviatedEnchantmentsString;
     public ItemPresentation Product { get; set; }
     public int Cost { get; set; }
 
