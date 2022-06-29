@@ -1,4 +1,6 @@
-﻿namespace Extensions;
+﻿using System.Collections.ObjectModel;
+
+namespace Extensions;
 
 public static class Extension {
     
@@ -46,6 +48,15 @@ public static class Extension {
             }
         }
         return roman;
+    }
+
+    public static void ReplaceWith<T>(this ObservableCollection<T> collection, List<T> items)
+    {
+        collection.Clear();
+        foreach (var item in items)
+        {
+            collection.Add(item);
+        }
     }
     
 }

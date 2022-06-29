@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Enchantment_Order.TargetPickerPage"
+    x:Class="Enchantment_Order.EnchantmentPickerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Enchantment_Order"
@@ -30,24 +30,20 @@
 
         <NavigationView.Content>
             <ListView
-                x:Name="TargetPicker"
+                x:Name="EnchantmentPicker"
                 Grid.Column="0"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                ItemsSource="{x:Bind ItemTypes}"
-                SelectionMode="Single"
-                SelectionChanged="OnTargetPicked">
+                ItemsSource="{x:Bind AvailableEnchantments, Mode=OneWay}"
+                SelectionMode="Multiple"
+                SelectionChanged="OnEnchantmentsPickedChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel 
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
-                            <Image 
-                                Source="{Binding ImageUri}"
-                                Height="20"
-                                Width="20"/>
                             <TextBlock 
-                                Text="{Binding FriendlyName}"
+                                Text="{Binding String}"
                                 VerticalAlignment="Center"
                                 Margin="10, 0, 0, 0"/>
                         </StackPanel>

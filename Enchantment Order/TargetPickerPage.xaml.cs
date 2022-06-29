@@ -16,6 +16,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BusinessLogic;
+using Enchantment_Order.Annotations;
+using Extensions;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,16 +27,21 @@ namespace Enchantment_Order
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TargetPickerPage : Page
+    public sealed partial class TargetPickerPage : Page, INotifyPropertyChanged
     {
 
-        public ObservableCollection<ItemType> ItemTypes = new(ItemType.Targetable);
+        private List<ItemTypePresentation> _itemTypes = ItemType.Targetable.ToItemTypePresentations();
+
+        internal List<ItemTypePresentation> ItemTypes
+        {
+            get => _itemTypes;
+            private set { _itemTypes = value; OnPropertyChanged(); }
+        }
 
         public TargetPickerPage()
         {
             InitializeComponent();
         }
-
 
         private void GoBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
@@ -43,13 +50,23 @@ namespace Enchantment_Order
 
         private void Search(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            var searchResult = ItemType.Targetable.Where(itemType => itemType.FriendlyName.ToLower().Contains(sender.Text.ToLower())).ToList();
-            ItemTypes.Clear();
-            foreach (var itemType in searchResult)
-            {
-                ItemTypes.Add(itemType);
-            }
+            var searchResult = ItemType.Targetable
+                .Where(itemType => itemType.FriendlyName.ToLower().Contains(sender.Text.ToLower()))
+                .ToList();
+            ItemTypes = searchResult.ToItemTypePresentations();
         }
 
+        private void OnTargetPicked(object sender, SelectionChangedEventArgs e)
+        {
+            Frame.Navigate(typeof(EnchantmentPickerPage), TargetPicker.SelectedItem);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

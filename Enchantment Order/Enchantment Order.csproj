@@ -57,6 +57,7 @@
     <None Remove="Assets\trident.png" />
     <None Remove="Assets\warped_fungus_on_a_stick.png" />
     <None Remove="Assets\xp.png" />
+    <None Remove="EnchantmentPickerPage.xaml" />
     <None Remove="HomePage.xaml" />
     <None Remove="TargetPickerPage.xaml" />
   </ItemGroup>
@@ -184,5 +185,11 @@
     <Page Update="HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="EnchantmentPickerPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Remove="EnchantmentPickerPage.xaml" />
   </ItemGroup>
 </Project>

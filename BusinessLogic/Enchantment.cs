@@ -9,9 +9,11 @@ public record Enchantment(
     
     public override string ToString() => $"{Type.FriendlyName} {Level.ToRomanNumerals()}";
 
-    public string ToAbbreviatedString() => $"{Type.AbbreviatedName} {Level}";
+    public string String => ToString();
 
-    public string ToArabicLevelString() => $"{Type.FriendlyName} {Level}";
+    public string AbbreviatedString => $"{Type.AbbreviatedName} {Level}";
+
+    public string ArabicLevelString => $"{Type.FriendlyName} {Level}";
 
     public Enchantment UpgradeBy(int level) => UpgradeTo(Level + level);
 
