@@ -91,7 +91,24 @@ internal static class CombinationOrderConverter
             ImageUri = 
                 itemType == ItemType.EnchantedBook ? new Uri("ms-appx:///Assets/book_enchanted.png") : 
                 itemType == ItemType.Helmet ? new Uri("ms-appx:///Assets/helmet.png") :
-                // TODO: Encode the remaining URIs
+                itemType == ItemType.Chestplate ? new Uri("ms-appx:///Assets/chestplate.png") :
+                itemType == ItemType.Leggings ? new Uri("ms-appx:///Assets/leggings.png") :
+                itemType == ItemType.Boots ? new Uri("ms-appx:///Assets/boots.png") :
+                itemType == ItemType.Elytra ? new Uri("ms-appx:///Assets/elytra.png") :
+                itemType == ItemType.Head ? new Uri("ms-appx:///Assets/head.png") :
+                itemType == ItemType.Sword ? new Uri("ms-appx:///Assets/sword.png") :
+                itemType == ItemType.Axe ? new Uri("ms-appx:///Assets/axe.png") :
+                itemType == ItemType.Pickaxe ? new Uri("ms-appx:///Assets/pickaxe.png") :
+                itemType == ItemType.Shovel ? new Uri("ms-appx:///Assets/shovel.png") :
+                itemType == ItemType.Hoe ? new Uri("ms-appx:///Assets/hoe.png") :
+                itemType == ItemType.Bow ? new Uri("ms-appx:///Assets/bow.png") :
+                itemType == ItemType.FishingRod ? new Uri("ms-appx:///Assets/fishing_rod.png") :
+                itemType == ItemType.Trident ? new Uri("ms-appx:///Assets/trident.png") :
+                itemType == ItemType.Crossbow ? new Uri("ms-appx:///Assets/crossbow.png") :
+                itemType == ItemType.Shears ? new Uri("ms-appx:///Assets/shears.png") :
+                itemType == ItemType.FlintAndSteel ? new Uri("ms-appx:///Assets/flint_and_steel.png") :
+                itemType == ItemType.CarrotOnAStick ? new Uri("ms-appx:///Assets/carrot_on_a_stick.png") :
+                itemType == ItemType.WarpedFungusOnAStick ? new Uri("ms-appx:///Assets/warped_fungus_on_a_stick.png") :
                 new Uri("ms-appx:///Assets/xp.png")
         };
 
