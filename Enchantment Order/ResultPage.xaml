@@ -5,8 +5,10 @@
     xmlns:local="using:Enchantment_Order"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
 
     <Grid>
 
@@ -47,7 +49,7 @@
             </NavigationView.PaneFooter>
 
             <NavigationView.Content>
-                <Grid>
+                <Grid >
                     <StackPanel
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -69,7 +71,7 @@
                                         <Grid 
                                             Margin="0, 8"
                                             Padding="10"
-                                            Background="WhiteSmoke"
+                                            Background="{StaticResource SystemControlPageBackgroundAltMediumBrush}"
                                             CornerRadius="10"
                                             MaxWidth="500">
                                             <Grid.RowDefinitions>
@@ -164,7 +166,7 @@
                             <StackPanel
                                 Margin="0, 0, 0, 16"
                                 Padding="10"
-                                Background="WhiteSmoke"
+                                Background="{StaticResource AppBarItemBackgroundThemeBrush}"
                                 CornerRadius="10"
                                 MaxWidth="500">
                                 <Image
