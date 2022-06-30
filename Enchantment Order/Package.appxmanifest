@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="11cb9f33-c1c5-4989-bd6f-5063f8702e70"
+    Name="EnchantmentOrder"
     Publisher="CN=hamue"
     Version="1.0.0.0" />
 
