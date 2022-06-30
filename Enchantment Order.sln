@@ -5,13 +5,13 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enchantment Order", "Enchantment Order\Enchantment Order.csproj", "{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{4F0FE37A-F64D-45F1-8761-BF3B962265C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{4F0FE37A-F64D-45F1-8761-BF3B962265C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{DF69E147-96ED-4AFD-AA63-2A7586F1A7C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "Extensions\Extensions.csproj", "{DF69E147-96ED-4AFD-AA63-2A7586F1A7C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1EDB3B6C-5AB3-4FF6-8DC3-4B91DB46703A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1EDB3B6C-5AB3-4FF6-8DC3-4B91DB46703A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{A0B21E6C-D734-4AE5-9F3E-F80D59E16CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{A0B21E6C-D734-4AE5-9F3E-F80D59E16CB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,9 +31,9 @@ Global
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|arm64.ActiveCfg = Debug|arm64
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|arm64.Build.0 = Debug|arm64
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|arm64.Deploy.0 = Debug|arm64
-		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.ActiveCfg = Debug|x64
-		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.Build.0 = Debug|x64
-		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.Deploy.0 = Debug|x64
+		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.ActiveCfg = Release|x64
+		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.Build.0 = Release|x64
+		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x64.Deploy.0 = Release|x64
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x86.ActiveCfg = Debug|x86
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x86.Build.0 = Debug|x86
 		{F84C13AC-A91E-4CED-9CB7-D08B2F11B43B}.Debug|x86.Deploy.0 = Debug|x86
